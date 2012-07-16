@@ -18,6 +18,7 @@ if (empty($cmd)) {
 	$cmd = 'enter';
 	$xid = '';
 }
+else if (empty($xid)) $xid = '';
 
 if (isset($_SERVER["DOCUMENT_ROOT"])) $doc_root = $_SERVER["DOCUMENT_ROOT"];
 else $doc_root = '';
