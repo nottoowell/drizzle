@@ -19,13 +19,13 @@ if (empty($cmd)) {
 	$xid = '';
 }
 
-if (isset(_SERVER["DOCUMENT_ROOT"])) $doc_root = _SERVER["DOCUMENT_ROOT"];
+if (isset($_SERVER["DOCUMENT_ROOT"])) $doc_root = $_SERVER["DOCUMENT_ROOT"];
 else $doc_root = '';
-if (isset(_SERVER["REQUEST_METHOD"])) $http_method = _SERVER["REQUEST_METHOD"];
+if (isset($_SERVER["REQUEST_METHOD"])) $http_method = $_SERVER["REQUEST_METHOD"];
 else $http_method = '';
-if (isset(_SERVER["HTTP_USER_AGENT"])) $ua = _SERVER["HTTP_USER_AGENT"];
+if (isset($_SERVER["HTTP_USER_AGENT"])) $ua = $_SERVER["HTTP_USER_AGENT"];
 else $ua = '';
-if (isset(_SERVER["REQUEST_TIME"])) $req_time = _SERVER["REQUEST_TIME"];
+if (isset($_SERVER["REQUEST_TIME"])) $req_time = $_SERVER["REQUEST_TIME"];
 else $req_time = '';
 
 echo "{$app}/{$cmd}/{$xid}" . "<br/>";
