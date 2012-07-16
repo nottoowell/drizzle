@@ -24,22 +24,19 @@ if (isset($_SERVER["DOCUMENT_ROOT"])) $doc_root = $_SERVER["DOCUMENT_ROOT"];
 else $doc_root = '';
 if (isset($_SERVER["REQUEST_METHOD"])) $http_method = $_SERVER["REQUEST_METHOD"];
 else $http_method = '';
-if (isset($_SERVER["HTTP_USER_AGENT"])) $ua = $_SERVER["HTTP_USER_AGENT"];
-else $ua = '';
+if (isset($_SERVER["HTTP_USER_AGENT"])) $user_agent = $_SERVER["HTTP_USER_AGENT"];
+else $user_agent = '';
 if (isset($_SERVER["REQUEST_TIME"])) $req_time = $_SERVER["REQUEST_TIME"];
 else $req_time = '';
 
-echo "{$app}/{$cmd}/{$xid}" . "<br/>";
-echo $doc_root . "<br/>";
-echo $http_method . "<br/>";
-echo $ua . "<br/>";
-echo $req_time . "<br/>";
+if (isset($_SERVER["HTTP_X_FORWARDED_FOR"])) $cli_ip = $_SERVER["HTTP_X_FORWARDED_FOR"];
+else $cli_ip = '';
 
-$version = phpversion();
-echo "<p>Your app is running on PHP version: " . $version . "<br/>";
-echo "The app IP is: " . $_SERVER['SERVER_ADDR'] . "<br/>";
-echo "The client IP is : " . $_SERVER['HTTP_X_FORWARDED_FOR'] . "<br/>";
-echo "Temp dir available to your app is: " . sys_get_temp_dir() . "</p>";
+$php_ver = phpversion();
+$tmp_dir = sys_get_temp_dir();
+
+if ($app == 'task') require_once('task.php');
+else if ($app == 'note') require_once('note.php');
 
 #phpinfo();
 ?>
