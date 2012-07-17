@@ -1,6 +1,6 @@
 <?php
 
-require_once('../core/util.php');
+require_once('core/util.php');
 
 if (isset($_SERVER["PATH_INFO"])) {
 	$path_info = substr($_SERVER["PATH_INFO"], 1);
