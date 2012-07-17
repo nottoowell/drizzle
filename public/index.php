@@ -35,6 +35,9 @@ $cli_ip = isset_or_empty($_SERVER["HTTP_X_FORWARDED_FOR"]);
 $php_ver = phpversion();
 $tmp_dir = sys_get_temp_dir();
 
+$req_json = null;
+if ($http_method == 'POST') $req_json = $HTTP_RAW_POST_DATA;
+
 #if ($app == 'task') require_once('task/task.handler.php');
 #else if ($app == 'note') require_once('note/note.handler.php');
 #else require_once('core/404.php');
@@ -53,6 +56,6 @@ echo "REQUEST<br />";
 foreach($_REQUEST as $key => $value) {
     print "$key => $value\n";
 }
-var_dump($HTTP_RAW_POST_DATA);
+echo "HTTP_RAW_POST_DATA={$req_json}<br />";
 
 ?>
