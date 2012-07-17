@@ -53,5 +53,6 @@ echo "REQUEST<br />";
 foreach($_REQUEST as $key => $value) {
     print "$key => $value\n";
 }
+var_dump($HTTP_RAW_POST_DATA);
 
 ?>
