@@ -2,7 +2,12 @@
 
 $db = new SQLite3($dsn);
 
-$sql = <<<SQL_1
+$sql = <<<SQL
+DROP TABLE IF EXISTS l
+SQL;
+$db->exec($sql);
+
+$sql = <<<SQL
 CREATE TABLE IF NOT EXISTS l (
 list_id INTEGER PRIMARY KEY,
 name TEXT,
@@ -11,17 +16,17 @@ psid INTEGER,
 ctime DATETIME,
 mtime DATETIME
 )
-SQL_1;
+SQL;
 $db->exec($sql);
 
-$sql = <<<SQL_2
+$sql = <<<SQL
 SELECT name FROM l;
-SQL_2;
+SQL;
 $results = $db->query($sql);
 if ($results->fetchArray() == FALSE) {
-	$sql = <<<SQL_3
+	$sql = <<<SQL
 INSERT INTO l (name) VALUES ('_tasks')
-SQL_3;
+SQL;
 	$db->exec($sql);
 }
 
