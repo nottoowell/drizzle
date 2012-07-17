@@ -22,7 +22,7 @@ class TaskDAO extends DataAccess {
 		$params[] = $task->ctime;
 		$params[] = $task->mtime;
 
-		return $this->update($sql, $params);
+		return $this->execute($sql, $params);
 	}
 	
 	public function delete($id) {
@@ -30,7 +30,7 @@ class TaskDAO extends DataAccess {
 		$sql = "UPDATE t SET dead = '1' WHERE id = ?";
 		$params = array();
 		$params[] = $id;
-		return $this->update($sql, $params);
+		return $this->execute($sql, $params);
 	}
 }
 

@@ -11,7 +11,7 @@ class DataAccess {
 		$this->db = new SQLite3($dsn);
 	}
 
-	protected function update($sql, $params) {
+	protected function execute($sql, $params) {
 		$stmt = $this->prepare_and_bind($sql, $params);
 		if ($stmt->execute()) {
 			if (strpos(strtolower($sql), "insert") != FALSE) {
@@ -23,7 +23,7 @@ class DataAccess {
 		return -1;
 	}
 
-	protected function read($sql, $params) {
+	protected function query($sql, $params) {
 		$stmt = $this->prepare_and_bind($sql, $params);
 		$res = $stmt->execute();
 		$rows = null;
