@@ -41,8 +41,16 @@ $tmp_dir = sys_get_temp_dir();
 
 phpinfo();
 
-
+echo "GET<br />";
+foreach($_GET as $key => $value) {
+    print "$key => $value\n";
+}
+echo "POST<br />";
 foreach($_POST as $key => $value) {
+    print "$key => $value\n";
+}
+echo "REQUEST<br />";
+foreach($_REQUEST as $key => $value) {
     print "$key => $value\n";
 }
 
