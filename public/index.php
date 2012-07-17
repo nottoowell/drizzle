@@ -38,14 +38,10 @@ $tmp_dir = sys_get_temp_dir();
 $req_json = null;
 if ($http_method == 'POST') $req_json = $HTTP_RAW_POST_DATA;
 
-echo "req_json={$req_json}" . "<br/>";
-var_dump(json_decode($req_json));
-echo "req_json=" . json_encode(json_decode($req_json)) . "<br/>";
-
-#if ($app == 'task') require_once('task/task.handler.php');
-#else if ($app == 'tasklist') require_once('task/task.handler.php');
-#else if ($app == 'note') require_once('note/note.handler.php');
-#else require_once('core/404.php');
+if ($app == 'task') require_once('task/task.handler.php');
+else if ($app == 'tasklist') require_once('task/task.handler.php');
+else if ($app == 'note') require_once('note/note.handler.php');
+else require_once('core/404.php');
 
 #phpinfo();
 ?>
