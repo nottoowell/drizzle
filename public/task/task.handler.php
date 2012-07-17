@@ -5,6 +5,7 @@ require_once('core/util.php');
 echo "{$app}/{$cmd}/{$xid}" . "<br/>";
 echo "req_json={$req_json}" . "<br/>";
 var_dump(json_decode($req_json));
+echo "<br/>";
 echo "req_json=" . json_encode(json_decode($req_json)) . "<br/>";
 echo "<br/>";
 echo "doc_root={$doc_root}" . "<br/>";
@@ -18,7 +19,7 @@ echo "tmp_dir={$tmp_dir}" . "<br/>";
 echo "<br/>";
 
 if ($cmd == 'html') {
-	require_once('task.html.php');
+	require_once('task/task.html.php');
 } else {
 	
 	if ($app == 'tasklist') {
