@@ -39,7 +39,7 @@ $tmp_dir = sys_get_temp_dir();
 #else if ($app == 'note') require_once('note/note.handler.php');
 #else require_once('core/404.php');
 
-phpinfo();
+#phpinfo();
 
 echo "GET<br />";
 foreach($_GET as $key => $value) {
