@@ -8,7 +8,7 @@ var_dump(json_decode($req_json));
 echo "<br/>";
 echo "req_json=" . json_encode(json_decode($req_json)) . "<br/>";
 echo "<br/>";
-echo "doc_root={$doc_root}" . "<br/>";
+echo "home_dir={$home_dir}" . "<br/>";
 echo "http_method={$http_method}" . "<br/>";
 echo "user_agent={$user_agent}" . "<br/>";
 echo "req_time={$req_time}" . "<br/>";
@@ -29,7 +29,7 @@ if ($cmd == 'html') {
 		$cmd = "task.{$cmd}";
 	}
 
-	$dsn = get_dsn($doc_root, $app);
+	$dsn = get_dsn($home_dir, $app);
 	
 	require_once('task.mig.php');
 
