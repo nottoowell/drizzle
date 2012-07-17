@@ -11,29 +11,20 @@ class TaskDAO extends DataAccess {
 
 	public function create($task) {
 		$sql = "INSERT INTO t (pid, title, content, tag, ctime, mtime) VALUES (?, ?, ?, ?, ?, ?)";
+
 		$params = array();
 		$params[] = $id;
-		$id = $tomato->id;
-		$pid = $tomato->pid;
-		$title = $tomato->title;
-		$content = $tomato->content;
-		$tag = $tomato->tag;
-		$ctime = $tomato->ctime;
-		$mtime = $tomato->mtime;
-		$i = 1;
-		$stmt->bindParam($i++, $pid);
-		$stmt->bindParam($i++, $title, SQLITE3_TEXT);
-		$stmt->bindParam($i++, $content, SQLITE3_TEXT);
-		$stmt->bindParam($i++, $tag, SQLITE3_TEXT);
-		$stmt->bindParam($i++, $ctime, SQLITE3_TEXT);
-		$stmt->bindParam($i++, $mtime, SQLITE3_TEXT);
-		if ($stmt->execute()) {
-			//$no_inserted = $stmt->rowCount();
-			return $this->db->lastInsertRowID();
-		}
-		return -1;
-	}
+		$params[] = $task->id;
+		$params[] = $task->pid;
+		$params[] = $task->title;
+		$params[] = $task->content;
+		$params[] = $task->tag;
+		$params[] = $task->ctime;
+		$params[] = $task->mtime;
 
+		return $this->update($sql, $params);
+	}
+	
 	public function delete($id) {
 		#$sql = "DELETE FROM t WHERE id = ?";
 		$sql = "UPDATE t SET dead = '1' WHERE id = ?";

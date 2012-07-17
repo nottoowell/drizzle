@@ -1,9 +1,11 @@
 <?php
 
-require_once('../core/util.php');
+require_once('core/util.php');
 
 echo "{$app}/{$cmd}/{$xid}" . "<br/>";
 echo "req_json={$req_json}" . "<br/>";
+var_dump(json_decode($req_json));
+echo "req_json=" . json_encode(json_decode($req_json)) . "<br/>";
 echo "<br/>";
 echo "doc_root={$doc_root}" . "<br/>";
 echo "http_method={$http_method}" . "<br/>";
