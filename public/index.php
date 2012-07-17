@@ -2,9 +2,7 @@
 
 require_once('core/util.php');
 
-if (isset($_SERVER["PATH_INFO"])) {
-	$path_info = substr($_SERVER["PATH_INFO"], 1);
-} else if (isset($_SERVER["REQUEST_URI"])) {
+if (isset($_SERVER["REQUEST_URI"])) {
 	$request_uri = substr($_SERVER["REQUEST_URI"], 1);
 	$sliced_request_uri = explode('?', $request_uri);
 	$path_info = $sliced_request_uri[0];
@@ -38,10 +36,10 @@ $tmp_dir = sys_get_temp_dir();
 $req_json = null;
 if ($http_method == 'POST') $req_json = $HTTP_RAW_POST_DATA;
 
-if ($app == 'task') require_once('task/task.handler.php');
-else if ($app == 'tasklist') require_once('task/task.handler.php');
-else if ($app == 'note') require_once('note/note.handler.php');
-else require_once('core/404.php');
+#if ($app == 'task') require_once('task/task.handler.php');
+#else if ($app == 'tasklist') require_once('task/task.handler.php');
+#else if ($app == 'note') require_once('note/note.handler.php');
+#else require_once('core/404.php');
 
-#phpinfo();
+phpinfo();
 ?>
