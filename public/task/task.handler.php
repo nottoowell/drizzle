@@ -21,20 +21,17 @@ echo "<br/>";
 if ($cmd == 'html') {
 	require_once('task/task.html.php');
 } else {
-	
 	if ($app == 'tasklist') {
 		$app = 'task';
 		$cmd = "list.{$cmd}";
 	} else if ($app == 'task') {
 		$cmd = "task.{$cmd}";
 	}
-
+	
 	$dsn = get_dsn($home_dir, $app);
 	
-	require_once('task.mig.php');
-
 	require_once('task.php');
-
+	
 	$json = null;
 	
 	switch ($cmd) {
@@ -64,6 +61,9 @@ if ($cmd == 'html') {
 			foreach ($tasks as $task) {
 				$task->save();
 			}
+			break;
+		case 'task.migrate':
+			require_once('task.mig.php');
 			break;
 		default:
 			break;

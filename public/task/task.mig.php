@@ -12,13 +12,17 @@ ctime DATETIME,
 mtime DATETIME
 )
 SQL_1;
-
 $db->exec($sql);
 
 $sql = <<<SQL_2
-INSERT INTO l (name) VALUES ('_tasks')
+SELECT name FROM l;
 SQL_2;
-
-$db->exec($sql);
+$results = $db->query($sql);
+if ($results->fetchArray() == FALSE) {
+	$sql = <<<SQL_3
+INSERT INTO l (name) VALUES ('_tasks')
+SQL_3;
+	$db->exec($sql);
+}
 
 ?>
