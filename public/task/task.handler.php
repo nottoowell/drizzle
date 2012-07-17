@@ -3,6 +3,7 @@
 require_once('../core/util.php');
 
 echo "{$app}/{$cmd}/{$xid}" . "<br/>";
+echo "req_json={$req_json}" . "<br/>";
 echo "<br/>";
 echo "doc_root={$doc_root}" . "<br/>";
 echo "http_method={$http_method}" . "<br/>";
@@ -14,48 +15,55 @@ echo "cli_ip={$cli_ip}" . "<br/>";
 echo "tmp_dir={$tmp_dir}" . "<br/>";
 echo "<br/>";
 
-$dsn = get_dsn($doc_root, $app);
-
 if ($cmd == 'html') {
 	require_once('task.html.php');
 } else {
+	
+	if ($app == 'tasklist') {
+		$app = 'task';
+		$cmd = "list.{$cmd}";
+	} else if ($app == 'task') {
+		$cmd = "task.{$cmd}";
+	}
+
+	$dsn = get_dsn($doc_root, $app);
+
 	require_once('task.php');
+
 	$json = null;
+	
 	switch ($cmd) {
-		case 'clist':
-			echo "category list";
+		case 'list.list':
 			$cates = Category::all();
 			$json = to_json($cates);
 			break;
-		case 'csave':
-			echo "category save";
-			$cate = Category::from_json();
+		case 'list.create':
+			$cate = Category::from_json($req_json);
 			$cate->save();
 			break;
-		case 'cdele':
-			echo "category delete";
-			Category::delete();
+		case 'list.update':
+			$cates = Category::from_json($req_json);
+			foreach ($cates as $cate) {
+				$cate->save();
+			}
 			break;
-		case 'list':
-			echo "task list";
+		case 'task.list':
 			$tasks = Task::all();
 			break;
-		case 'save':
-			echo "task save";
-			$task = Task::from_json();
+		case 'task.create':
+			$task = Task::from_json($req_json);
 			$task->save();
 			break;
-		case 'move':
-			echo "task move";
-
-			break;
-		case 'dele':
-			echo "task delete";
-			Task::delete();
+		case 'task.update':
+			$tasks = Category::from_json($req_json);
+			foreach ($tasks as $task) {
+				$task->save();
+			}
 			break;
 		default:
 			break;
 	}
+	
 	print_json($json);
 }
 
