@@ -40,4 +40,10 @@ $tmp_dir = sys_get_temp_dir();
 #else require_once('core/404.php');
 
 phpinfo();
+
+
+foreach($_POST as $key => $value) {
+    print "$key => $value\n";
+}
+
 ?>
