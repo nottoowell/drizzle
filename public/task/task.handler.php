@@ -2,7 +2,7 @@
 
 require_once('core/util.php');
 
-echo "{$app}/{$cmd}/{$xid}" . "<br/>";
+echo "{$app}/{$cmd}/{$tid}" . "<br/>";
 echo "req_json={$req_json}" . "<br/>";
 var_dump(json_decode($req_json));
 echo "<br/>";
