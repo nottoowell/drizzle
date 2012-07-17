@@ -1,14 +1,16 @@
 <?php
 
+require_once('task.dao.php');
+
 class Category {
 
-	private $data
+	private $data;
 
 	static function all() {
 		global $dsn;
 
 		$dao = new CategoryDAO($dsn);
-		$dao->find_all();
+		return $dao->find_all();
 	}
 
 	static function from_json($json) {

@@ -30,6 +30,8 @@ if ($cmd == 'html') {
 	}
 
 	$dsn = get_dsn($doc_root, $app);
+	
+	require_once('task.mig.php');
 
 	require_once('task.php');
 
@@ -38,7 +40,7 @@ if ($cmd == 'html') {
 	switch ($cmd) {
 		case 'list.list':
 			$cates = Category::all();
-			$json = to_json($cates);
+			$json = json_encode($cates);
 			break;
 		case 'list.create':
 			$cate = Category::from_json($req_json);
@@ -67,7 +69,8 @@ if ($cmd == 'html') {
 			break;
 	}
 	
-	print_json($json);
+	echo $json;
+	#print_json($json);
 }
 
 ?>

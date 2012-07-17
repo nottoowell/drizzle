@@ -1,11 +1,8 @@
 <?php
 
-function isset_or_empty($x) {
-	return isset($x) ? $x : '';
-}
-
-function get_dsn($doc_root, $app_name) {
-	return substr($doc_root, 0, strrpos($doc_root, "/")) . "/" . $app_name . ".db";
+function get_dsn($home_dir, $app_name) {
+	if (empty($home_dir)) return $app_name . ".db";
+	else return $home_dir . "/" . $app_name . ".db";
 }
 
 ?>

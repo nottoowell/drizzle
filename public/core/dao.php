@@ -39,7 +39,7 @@ class DataAccess {
 		$stmt = $this->db->prepare($sql);
 		if (strpos($sql, "?") != FALSE) {
 			$i = 1;
-			for ($params as $param) {
+			foreach ($params as $param) {
 				if (is_string($param)) {
 					$stmt->bindParam($i++, $title, SQLITE3_TEXT);
 				} else {
@@ -47,12 +47,13 @@ class DataAccess {
 				}
 			}
 		} else {
-			for ($params as $param) {
+			foreach ($params as $param) {
 				if (is_string($param->value)) {
 					$stmt->bindParam(":{$param->key}", $param->value, SQLITE3_TEXT);
 				} else {
 					$stmt->bindParam(":{$param->key}", $param->value);
 				}
+			}
 		}
 		return $stmt;
 	}
