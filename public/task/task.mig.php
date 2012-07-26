@@ -2,11 +2,20 @@
 
 $db = new SQLite3($dsn);
 
-//*
+function execute_migrate($sql) {
+	global $db;
+	echo "<pre><code>{$sql}</code></pre>";
+	$db->exec($sql);
+}
+
+$migrate_version = 3;
+echo "<p>migrate to version {$migrate_version}</p>";
+
+/*
 $sql = <<<SQL
 DROP TABLE IF EXISTS g
 SQL;
-$db->exec($sql);
+execute_migrate($sql);
 //*/
 
 $sql = <<<SQL
@@ -19,7 +28,7 @@ CREATE TABLE IF NOT EXISTS g (
 	mtime DATETIME
 )
 SQL;
-$db->exec($sql);
+execute_migrate($sql);
 
 $sql = <<<SQL
 SELECT name FROM g;
@@ -29,28 +38,28 @@ if ($results->fetchArray() == FALSE) {
 	$sql = <<<SQL
 INSERT INTO g (name) VALUES ('_tasks')
 SQL;
-	$db->exec($sql);
+	execute_migrate($sql);
 }
 
 /*
 $sql = <<<SQL
 DROP TABLE IF EXISTS thn
 SQL;
-$db->exec($sql);
+execute_migrate($sql);
 //*/
 
 /*
 $sql = <<<SQL
 DROP TABLE IF EXISTS n
 SQL;
-$db->exec($sql);
+execute_migrate($sql);
 //*/
 
 /*
 $sql = <<<SQL
 DROP TABLE IF EXISTS t
 SQL;
-$db->exec($sql);
+execute_migrate($sql);
 //*/
 
 $sql = <<<SQL
@@ -68,7 +77,7 @@ CREATE TABLE IF NOT EXISTS t (
 	FOREIGN KEY (list_id) REFERENCES g (list_id)
 )
 SQL;
-$db->exec($sql);
+execute_migrate($sql);
 
 $sql = <<<SQL
 CREATE TABLE IF NOT EXISTS n (
@@ -79,7 +88,7 @@ CREATE TABLE IF NOT EXISTS n (
 	mtime DATETIME
 )
 SQL;
-$db->exec($sql);
+execute_migrate($sql);
 
 $sql = <<<SQL
 CREATE TABLE IF NOT EXISTS thn (
@@ -90,6 +99,6 @@ CREATE TABLE IF NOT EXISTS thn (
 	FOREIGN KEY (note_id) REFERENCES n (note_id)
 )
 SQL;
-$db->exec($sql);
+execute_migrate($sql);
 
 ?>
