@@ -13,20 +13,31 @@ class TaskGroup {
 		return $dao->find_all();
 	}
 
-	static function from_json($json) {
+	static function with_obje($obje) {
 		$group = new TaskGroup();
-		$group->data = json_decode($json);
+		$group->data = $obje;
 		return $group;
 	}
 
 	function save() {
 		global $dsn;
 
-		$dao = new TaskGroupDAO($dsn);
-		$dao->create($this->data);
-	}
+		$result = (object) array();
 
-	function from_row($row) {
+		$dao = new TaskGroupDAO($dsn);
+		if (isset($this->data->list_id)) {
+			$retval = $dao->update($this->data);
+			if ($retval > 0) {
+				$result->list_id = $this->data->list_id;
+			}
+		} else {
+			$retval = $dao->create($this->data);
+			if ($retval > 0) {
+				$result->list_id = $retval;
+			}
+		}
+
+		return $result;
 	}
 }
 

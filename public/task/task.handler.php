@@ -40,14 +40,20 @@ if ($cmd == 'html') {
 			$json = json_encode($groups);
 			break;
 		case 'list.create':
-			$group = TaskGroup::from_json($req_json);
-			$group->save();
+			$datum = json_decode($req_json);
+			$group = TaskGroup::with_obje($datum);
+			$result = $group->save();
+			$json = json_encode($result);
 			break;
 		case 'list.update':
-			$groups = TaskGroup::from_json($req_json);
-			foreach ($groups as $group) {
-				$group->save();
+			$data = json_decode($req_json);
+			$results = array();
+			foreach ($data as $datum) {
+				$group = TaskGroup::with_obje($datum);
+				$result = $group->save();
+				$results[] = $result;
 			}
+			$json = json_encode($results);
 			break;
 		case 'task.list':
 			$tasks = Task::all();

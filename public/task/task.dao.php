@@ -11,6 +11,10 @@ class TaskGroupDAO extends DataAccess {
 		
 		return $this->query($sql, $params);
 	}
+
+	public function create($task) {
+		$sql = "INSERT INTO t (name) VALUES (:name)";
+		return $this->execute($sql, $task);
 }
 
 class TaskDAO extends DataAccess {

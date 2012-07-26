@@ -41,17 +41,17 @@ class DataAccess {
 			$i = 1;
 			foreach ($params as $param) {
 				if (is_string($param)) {
-					$stmt->bindParam($i++, $title, SQLITE3_TEXT);
+					$stmt->bindParam($i++, $param, SQLITE3_TEXT);
 				} else {
-					$stmt->bindParam($i++, $pid);
+					$stmt->bindParam($i++, $param);
 				}
 			}
 		} else {
-			foreach ($params as $param) {
+			foreach ($params as $key => $val) {
 				if (is_string($param->value)) {
-					$stmt->bindParam(":{$param->key}", $param->value, SQLITE3_TEXT);
+					$stmt->bindParam(":{$key}", $val, SQLITE3_TEXT);
 				} else {
-					$stmt->bindParam(":{$param->key}", $param->value);
+					$stmt->bindParam(":{$key}", $val);
 				}
 			}
 		}
