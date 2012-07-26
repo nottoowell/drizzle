@@ -2,10 +2,10 @@
 
 require_once('core/dao.php');
 
-class CategoryDAO extends DataAccess {
+class TaskGroupDAO extends DataAccess {
 
 	public function find_all() {
-		$sql = "SELECT list_id, name, dead, psid, ctime, mtime FROM l WHERE dead IS NULL";
+		$sql = "SELECT list_id, name, dead, psid, ctime, mtime FROM g WHERE dead IS NULL";
 		
 		$params = array();
 		

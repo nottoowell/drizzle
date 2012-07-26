@@ -36,17 +36,17 @@ if ($cmd == 'html') {
 	
 	switch ($cmd) {
 		case 'list.list':
-			$cates = Category::all();
-			$json = json_encode($cates);
+			$groups = TaskGroup::all();
+			$json = json_encode($groups);
 			break;
 		case 'list.create':
-			$cate = Category::from_json($req_json);
-			$cate->save();
+			$group = TaskGroup::from_json($req_json);
+			$group->save();
 			break;
 		case 'list.update':
-			$cates = Category::from_json($req_json);
-			foreach ($cates as $cate) {
-				$cate->save();
+			$groups = TaskGroup::from_json($req_json);
+			foreach ($groups as $group) {
+				$group->save();
 			}
 			break;
 		case 'task.list':
@@ -57,7 +57,7 @@ if ($cmd == 'html') {
 			$task->save();
 			break;
 		case 'task.update':
-			$tasks = Category::from_json($req_json);
+			$tasks = Task::from_json($req_json);
 			foreach ($tasks as $task) {
 				$task->save();
 			}
