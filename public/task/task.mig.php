@@ -8,10 +8,31 @@ function execute_migrate($sql) {
 	$db->exec($sql);
 }
 
-$migrate_version = 4;
+$migrate_version = 5;
 echo "<p>migrate to version {$migrate_version}</p>";
 
-//*
+/*
+$sql = <<<SQL
+DROP TABLE IF EXISTS thn
+SQL;
+execute_migrate($sql);
+//*/
+
+/*
+$sql = <<<SQL
+DROP TABLE IF EXISTS n
+SQL;
+execute_migrate($sql);
+//*/
+
+/*
+$sql = <<<SQL
+DROP TABLE IF EXISTS t
+SQL;
+execute_migrate($sql);
+//*/
+
+/*
 $sql = <<<SQL
 DROP TABLE IF EXISTS g
 SQL;
@@ -40,27 +61,6 @@ INSERT INTO g (name) VALUES ('_tasks')
 SQL;
 	execute_migrate($sql);
 }
-
-//*
-$sql = <<<SQL
-DROP TABLE IF EXISTS thn
-SQL;
-execute_migrate($sql);
-//*/
-
-//*
-$sql = <<<SQL
-DROP TABLE IF EXISTS n
-SQL;
-execute_migrate($sql);
-//*/
-
-//*
-$sql = <<<SQL
-DROP TABLE IF EXISTS t
-SQL;
-execute_migrate($sql);
-//*/
 
 $sql = <<<SQL
 CREATE TABLE IF NOT EXISTS t (
