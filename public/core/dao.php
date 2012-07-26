@@ -28,7 +28,7 @@ class DataAccess {
 		$res = $stmt->execute();
 		$rows = null;
 		if ($res) {
-			while ($row = $res->fetchArray(SQLITE3_BOTH)) { // SQLITE3_BOTH, SQLITE3_ASSOC, SQLITE3_NUM
+			while ($row = $res->fetchArray(SQLITE3_ASSOC)) { // SQLITE3_BOTH, SQLITE3_ASSOC, SQLITE3_NUM
 				$rows[] = $row;
 			}
 		}
