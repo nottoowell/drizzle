@@ -2,11 +2,6 @@
 
 $db = new SQLite3($dsn);
 
-$sql = <<<SQL
-DROP TABLE IF EXISTS l
-SQL;
-$db->exec($sql);
-
 /*
 $sql = <<<SQL
 DROP TABLE IF EXISTS g
