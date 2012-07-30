@@ -185,6 +185,9 @@ div.clear {
 #tasks-edit-list label {
 	display: inline;
 }
+#tasks-edit-list li label.done {
+	text-decoration: line-through;
+}
 #tasks-edit-list label.inactive {
 	display: none;
 }
@@ -292,6 +295,7 @@ var RemoteStorage = {
 	query: function (cmd, param, callback) {
 		var method = 'GET';
 		var url = undefined;
+		var data = JSON.stringify(param);
 		var callback_wrapper = function (json) { callback(JSON.parse(json)); };
 		switch (cmd) {
 			case 'group-list':
@@ -300,7 +304,7 @@ var RemoteStorage = {
 				break;
 			case 'task-list':
 				url = 'task/list/' + param.group_id;
-				do_ajax(url, null, callback_wrapper);
+				do_ajax(url, data, callback_wrapper);
 				break;
 		}
 	},
@@ -356,13 +360,13 @@ var LocalStorage = {
 				json = {'group_id':4};
 				break;
 			case 'group-update':
-				json = {'group_id':param.group_id};
+				json = [{'group_id':param.group_id}];
 				break;
 			case 'task-create':
 				json = {'task_id':14};
 				break;
 			case 'task-update':
-				json = {'task_id':param.task_id};
+				json = [{'task_id':param.task_id}];
 				break;
 		}
 		callback(json);
@@ -401,8 +405,8 @@ _.includes(Task, {
 		var self = this;
 		var param = this.to_json();
 		_.extends(param, json);
-		Storage.update('task-update', param, function (json) {
-			_.extends(param, json);
+		Storage.update('task-update', [param], function (json) {
+			_.extends(param, json[0]);
 			if (callback) {
 				callback(param);
 			} else {
@@ -418,8 +422,8 @@ _.includes(Task, {
 		var self = this;
 		var param = this.to_json();
 		_.extends(param, {'dead': 'D'});
-		Storage.update('task-update', param, function (json) {
-			_.extends(param, json);
+		Storage.update('task-update', [param], function (json) {
+			_.extends(param, json[0]);
 			self.destroyed(param);
 		});
 	},
@@ -475,9 +479,9 @@ _.includes(Tasks, {
 			}
 		}
 	},
-	load: function (group_id) {
+	load: function () {
 		var self = this;
-		Storage.query('task-list', {'group_id':group_id}, function (json) {
+		Storage.query('task-list', {'group_id':self.group.group_id}, function (json) {
 			self.loaded(json);
 		});
 	},
@@ -527,8 +531,35 @@ _.includes(Tasks, {
 			this.events['changed']();
 		}
 	},
-	clear: function () {},
-	cleared: function () {},
+	clear: function () {
+		var self = this;
+		var params = [];
+		for (var i = 0; i < self.models.length; i++) {
+			var model = self.models[i];
+			if (model.done == 'D') {
+				var param = model.to_json();
+				_.extends(param, {'dead': 'D'});
+				params.push(param);
+			}
+		}
+		if (params.length > 0) {
+			Storage.update('task-update', params, function (json) {
+				for (var i = 0; i < params.length; i++) {
+					_.extends(params[i], json[i]);
+				}
+				self.cleared(params);
+			});
+		}	
+	},
+	cleared: function (json) {
+		for (var i = 0; i < json.length; i++) {
+			var task = this.get(json[i].task_id);
+			if (task) this.remove(task);
+		}
+		if (this.events['cleared']) {
+			this.events['cleared']();
+		}
+	},
 	events: {},
 	bind: function (name, callback, ctx) {
 		this.events[name] = function () { callback.apply(ctx, arguments); };
@@ -760,7 +791,7 @@ _.extends(TaskGroups, {});
 <script type="text/template" id="x-template-taskgroups-show-item"><li group_id="${group_id}"><label>${name}</label></li></script>
 <script type="text/template" id="x-template-taskgroups-edit-item"><li group_id="${group_id}"><span>&#8861;</span><label>${name}</label><input type="text" data-action="edit"></li></script>
 <script type="text/template" id="x-template-tasks-show-item"><li task_id="${task_id}"><input type="checkbox" {{if done}}checked{{/if}}><label {{if done}}class="done"{{/if}}>${name}</label></li></script>
-<script type="text/template" id="x-template-tasks-edit-item"><li task_id="${task_id}"><span>&#8861;</span><label>${name}</label><input type="text" data-action="edit"></li></script>
+<script type="text/template" id="x-template-tasks-edit-item"><li task_id="${task_id}"><span>&#8861;</span><label {{if done}}class="done"{{/if}}>${name}</label><input type="text" data-action="edit"></li></script>
 <script type="text/javascript">
 
 function GroupsViewer() {}
@@ -1034,6 +1065,7 @@ _.includes(TasksEditor, {
 	tasks: undefined,
 	attach_model: function (tasks) {
 		this.tasks = tasks;
+		this.tasks.bind('cleared', this.show, this);
 		this.tasks.bind('updated', this.show, this);
 		this.tasks.bind('destroyed', this.destroyed, this);
 	},
@@ -1055,7 +1087,9 @@ _.includes(TasksEditor, {
 	bind: function () {
 		var $pane = this.$pane;
 		var bindings = [
-			['click', 'button', 'open_viewer'],
+			['click', 'button[data-action="groups"]', 'open_group_viewer'],
+			['click', 'button[data-action="done"]', 'open_viewer'],
+			['click', 'button[data-action="clear"]', 'clear'],
 			['click', 'ul#tasks-edit-list span', 'destroy'],
 			['click', 'ul#tasks-edit-list label', 'edit'],
 			['keypress', 'ul#tasks-edit-list input', 'update_on_enter'],
@@ -1084,8 +1118,14 @@ _.includes(TasksEditor, {
 		$pane.siblings().removeClass('active');
 		$pane.addClass('active');
 	},
+	open_group_viewer: function () {
+		groups_viewer.show();;
+	},
 	open_viewer: function () {
 		tasks_viewer.show();
+	},
+	clear: function () {
+		this.tasks.clear();
 	},
 	destroy: function (e) {
 		this.tasks.destroy($(e.srcElement).parent().attr('task_id'));

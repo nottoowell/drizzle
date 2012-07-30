@@ -66,10 +66,15 @@ if ($cmd == 'html') {
 			$json = json_encode($results);
 			break;
 		case 'task.list':
-			$tasks = Task::all();
+			$datum = json_decode($req_json);
+			#debug_foreach($datum);
+			$tasks = Task::all($datum->group_id);
+			$json = json_encode($tasks);
 			break;
 		case 'task.create':
+			#debug($req_json);
 			$datum = json_decode($req_json);
+			#debug_foreach($datum);
 			$task = Task::with_obje($datum);
 			if ($task) {
 				$result = $task->save();
