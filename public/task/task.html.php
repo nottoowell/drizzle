@@ -293,7 +293,6 @@ var RemoteStorage = {
 		var method = 'GET';
 		var url = undefined;
 		var callback_wrapper = function (json) { callback(JSON.parse(json)); };
-		var json = null;
 		switch (cmd) {
 			case 'group-list':
 				url = 'tasklist/list';
@@ -310,23 +309,22 @@ var RemoteStorage = {
 		var url = undefined;
 		var data = JSON.stringify(param);
 		var callback_wrapper = function (json) { callback(JSON.parse(json)); };
-		var json = null;
 		switch (cmd) {
 			case 'group-create':
 				url = 'tasklist/create';
-				do_ajax(url, null, callback_wrapper);
+				do_ajax(url, data, callback_wrapper);
 				break;
 			case 'group-update':
 				url = 'tasklist/update';
-				do_ajax(url, null, callback_wrapper);
+				do_ajax(url, data, callback_wrapper);
 				break;
 			case 'task-create':
 				url = 'task/create';
-				do_ajax(url, null, callback_wrapper);
+				do_ajax(url, data, callback_wrapper);
 				break;
 			case 'task-update':
 				url = 'task/update';
-				do_ajax(url, null, callback_wrapper);
+				do_ajax(url, data, callback_wrapper);
 				break;
 		}
 	}
