@@ -79,6 +79,7 @@ ul {
 	top: 40px;
 	bottom: 0;
 
+	width: 100%;
 	width: 480px;
 	height: 400px;
 
