@@ -292,16 +292,16 @@ var RemoteStorage = {
 	query: function (cmd, param, callback) {
 		var method = 'GET';
 		var url = undefined;
-		callback = function (json) { callback(JSON.parse(json)); };
+		var callback_wrapper = function (json) { callback(JSON.parse(json)); };
 		var json = null;
 		switch (cmd) {
 			case 'group-list':
 				url = 'tasklist/list';
-				do_ajax(url, null, callback);
+				do_ajax(url, null, callback_wrapper);
 				break;
 			case 'task-list':
 				url = 'task/list/' + param.group_id;
-				do_ajax(url, null, callback);
+				do_ajax(url, null, callback_wrapper);
 				break;
 		}
 	},
@@ -309,24 +309,24 @@ var RemoteStorage = {
 		var method = 'POST';
 		var url = undefined;
 		var data = JSON.stringify(param);
-		callback = function (json) { callback(JSON.parse(json)); };
+		var callback_wrapper = function (json) { callback(JSON.parse(json)); };
 		var json = null;
 		switch (cmd) {
 			case 'group-create':
 				url = 'tasklist/create';
-				do_ajax(url, null, callback);
+				do_ajax(url, null, callback_wrapper);
 				break;
 			case 'group-update':
 				url = 'tasklist/update';
-				do_ajax(url, null, callback);
+				do_ajax(url, null, callback_wrapper);
 				break;
 			case 'task-create':
 				url = 'task/create';
-				do_ajax(url, null, callback);
+				do_ajax(url, null, callback_wrapper);
 				break;
 			case 'task-update':
 				url = 'task/update';
-				do_ajax(url, null, callback);
+				do_ajax(url, null, callback_wrapper);
 				break;
 		}
 	}
