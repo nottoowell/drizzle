@@ -23,7 +23,7 @@ if (empty($cmd)) {
 	$tid = '';
 }
 
-$home_dir = isset($_SERVER["HOME"]) ? $_SERVER["HOME"] : '';
+#$home_dir = isset($_SERVER["HOME"]) ? $_SERVER["HOME"] : '';
 $http_method = isset($_SERVER["REQUEST_METHOD"]) ? $_SERVER["REQUEST_METHOD"] : '';
 $user_agent = isset($_SERVER["HTTP_USER_AGENT"]) ? $_SERVER["HTTP_USER_AGENT"] : '';
 $req_time = isset($_SERVER["REQUEST_TIME"]) ? $_SERVER["REQUEST_TIME"] : '';
