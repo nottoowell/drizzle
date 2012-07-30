@@ -8,31 +8,31 @@ function execute_migrate($sql) {
 	$db->exec($sql);
 }
 
-$migrate_version = 5;
+$migrate_version = 6;
 echo "<p>migrate to version {$migrate_version}</p>";
 
-/*
+//*
 $sql = <<<SQL
 DROP TABLE IF EXISTS thn
 SQL;
 execute_migrate($sql);
 //*/
 
-/*
+//*
 $sql = <<<SQL
 DROP TABLE IF EXISTS n
 SQL;
 execute_migrate($sql);
 //*/
 
-/*
+//*
 $sql = <<<SQL
 DROP TABLE IF EXISTS t
 SQL;
 execute_migrate($sql);
 //*/
 
-/*
+//*
 $sql = <<<SQL
 DROP TABLE IF EXISTS g
 SQL;
@@ -41,7 +41,7 @@ execute_migrate($sql);
 
 $sql = <<<SQL
 CREATE TABLE IF NOT EXISTS g (
-	list_id INTEGER PRIMARY KEY,
+	group_id INTEGER PRIMARY KEY,
 	name TEXT,
 	dead TEXT(1) DEFAULT NULL,
 	psid INTEGER,
@@ -65,7 +65,7 @@ SQL;
 $sql = <<<SQL
 CREATE TABLE IF NOT EXISTS t (
 	task_id INTEGER PRIMARY KEY,
-	list_id INTEGER,
+	group_id INTEGER,
 	name TEXT,
 	dead TEXT(1) DEFAULT NULL,
 	done TEXT(1) DEFAULT NULL,
@@ -74,7 +74,7 @@ CREATE TABLE IF NOT EXISTS t (
 	ctime DATETIME,
 	mtime DATETIME,
 	gcal_id TEXT(40),
-	FOREIGN KEY (list_id) REFERENCES g (list_id)
+	FOREIGN KEY (group_id) REFERENCES g (group_id)
 )
 SQL;
 execute_migrate($sql);
