@@ -32,7 +32,7 @@ $php_ver = phpversion();
 $tmp_dir = sys_get_temp_dir();
 
 $req_json = null;
-if ($http_method == 'POST') $req_json = $HTTP_RAW_POST_DATA;
+if ($http_method == 'POST' && isset($HTTP_RAW_POST_DATA)) $req_json = $HTTP_RAW_POST_DATA;
 
 if ($app == 'task') require_once('task/task.handler.php');
 else if ($app == 'tasklist') require_once('task/task.handler.php');
