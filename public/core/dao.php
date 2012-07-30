@@ -55,7 +55,7 @@ class DataAccess {
 			}
 		} else {
 			foreach ($params as $key => $val) {
-				if (is_string($param->value)) {
+				if (is_string($val)) {
 					$stmt->bindValue(":{$key}", $val, SQLITE3_TEXT);
 				} else {
 					$stmt->bindValue(":{$key}", $val);
