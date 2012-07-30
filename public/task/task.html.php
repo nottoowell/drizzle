@@ -289,7 +289,6 @@ function do_ajax(target, args, callback) {
 </script><script type="text/javascript">
 
 var RemoteStorage = {
-	host: 'https://drizzle.orchestra.io',
 	query: function (cmd, param, callback) {
 		var method = 'GET';
 		var url = undefined;
@@ -297,11 +296,11 @@ var RemoteStorage = {
 		var json = null;
 		switch (cmd) {
 			case 'group-list':
-				url = this.host + '/tasklist/list';
+				url = 'tasklist/list';
 				do_ajax(url, null, callback);
 				break;
 			case 'task-list':
-				url = this.host + '/task/list/' + param.group_id;
+				url = 'task/list/' + param.group_id;
 				do_ajax(url, null, callback);
 				break;
 		}
@@ -314,19 +313,19 @@ var RemoteStorage = {
 		var json = null;
 		switch (cmd) {
 			case 'group-create':
-				url = this.host + '/tasklist/create';
+				url = 'tasklist/create';
 				do_ajax(url, null, callback);
 				break;
 			case 'group-update':
-				url = this.host + '/tasklist/update';
+				url = 'tasklist/update';
 				do_ajax(url, null, callback);
 				break;
 			case 'task-create':
-				url = this.host + '/task/create';
+				url = 'task/create';
 				do_ajax(url, null, callback);
 				break;
 			case 'task-update':
-				url = this.host + '/task/update';
+				url = 'task/update';
 				do_ajax(url, null, callback);
 				break;
 		}
