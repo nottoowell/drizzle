@@ -2,6 +2,7 @@
 
 require_once('core/util.php');
 
+/****
 echo "{$app}/{$cmd}/{$tid}" . "<br/>";
 echo "req_json={$req_json}" . "<br/>";
 var_dump(json_decode($req_json));
@@ -17,6 +18,7 @@ echo "php_ver={$php_ver}" . "<br/>";
 echo "cli_ip={$cli_ip}" . "<br/>";
 echo "tmp_dir={$tmp_dir}" . "<br/>";
 echo "<br/>";
+//****/
 
 if ($cmd == 'html') {
 	require_once('task/task.html.php');
@@ -70,6 +72,9 @@ if ($cmd == 'html') {
 			break;
 		case 'task.migrate':
 			require_once('task.mig.php');
+			break;
+		case 'task.export':
+			require_once('task.exp.php');
 			break;
 		default:
 			break;

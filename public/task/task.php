@@ -16,6 +16,9 @@ class TaskGroup {
 	static function with_obje($obje) {
 		$group = new TaskGroup();
 		$group->data = $obje;
+		if (isset($this->data->list_id)) {
+			$this->data->list_id = intval($this->data->list_id);
+		}
 		return $group;
 	}
 
