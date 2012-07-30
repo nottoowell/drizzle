@@ -5,7 +5,7 @@ require_once('core/dao.php');
 class TaskGroupDAO extends DataAccess {
 
 	public function find_all() {
-		$sql = "SELECT list_id, name, dead, psid, ctime, mtime FROM g WHERE dead IS NULL";
+		$sql = "SELECT group_id, name, dead, psid, ctime, mtime FROM g WHERE dead IS NULL";
 		
 		$params = array();
 		
@@ -13,12 +13,18 @@ class TaskGroupDAO extends DataAccess {
 	}
 
 	public function create($group) {
+		debug("TaskGroupDAO.create()");
+		debug_foreach($group);
+
 		$sql = "INSERT INTO g (name) VALUES (:name)";
 		return $this->execute($sql, $group);
 	}
 
 	public function update($group) {
-		$sql = "UPDATE g SET name = :name, dead = :dead, psid = :psid WHERE list_id = :list_id";
+		debug("TaskGroupDAO.update()");
+		debug_foreach($group);
+		
+		$sql = "UPDATE g SET name = :name, dead = :dead, psid = :psid WHERE group_id = :group_id";
 		return $this->execute($sql, $group);
 	}
 }

@@ -30,7 +30,7 @@ function query_export($sql) {
 echo "<h2>g</h2>";
 
 $sql = <<<SQL
-SELECT list_id, name, dead, psid, ctime, mtime FROM g
+SELECT group_id, name, dead, psid, ctime, mtime FROM g
 SQL;
 query_export($sql);
 
@@ -38,7 +38,7 @@ query_export($sql);
 echo "<h2>t</h2>";
 
 $sql = <<<SQL
-SELECT task_id, list_id, name, dead, done, pid, psid, ctime, mtime, gcal_id FROM t
+SELECT task_id, group_id, name, dead, done, pid, psid, ctime, mtime, gcal_id FROM t
 SQL;
 query_export($sql);
 

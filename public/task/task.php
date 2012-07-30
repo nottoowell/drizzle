@@ -14,29 +14,36 @@ class TaskGroup {
 	}
 
 	static function with_obje($obje) {
+		if (empty($obje)) {
+			return null;
+		}
 		$group = new TaskGroup();
 		$group->data = $obje;
-		if (isset($group->data->list_id)) {
-			$group->data->list_id = intval($group->data->list_id);
+		if (isset($group->data->group_id)) {
+			$group->data->group_id = intval($group->data->group_id);
 		}
 		return $group;
 	}
 
 	function save() {
 		global $dsn;
+		
+		#debug("TaskGroup.save()");
 
 		$result = (object) array();
 
 		$dao = new TaskGroupDAO($dsn);
-		if (isset($this->data->list_id)) {
+		if (isset($this->data->group_id)) {
+			#debug($this->data->group_id);
 			$retval = $dao->update($this->data);
 			if ($retval > 0) {
-				$result->list_id = $this->data->list_id;
+				$result->group_id = $this->data->group_id;
 			}
 		} else {
 			$retval = $dao->create($this->data);
+			#debug("dao.create() returns " . $retval);
 			if ($retval > 0) {
-				$result->list_id = $retval;
+				$result->group_id = $retval;
 			}
 		}
 

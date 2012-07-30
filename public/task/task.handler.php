@@ -23,9 +23,9 @@ echo "<br/>";
 if ($cmd == 'html') {
 	require_once('task/task.html.php');
 } else {
-	if ($app == 'tasklist') {
+	if ($app == 'taskgroup') {
 		$app = 'task';
-		$cmd = "list.{$cmd}";
+		$cmd = "group.{$cmd}";
 	} else if ($app == 'task') {
 		$cmd = "task.{$cmd}";
 	}
@@ -37,23 +37,31 @@ if ($cmd == 'html') {
 	$json = null;
 	
 	switch ($cmd) {
-		case 'list.list':
+		case 'group.list':
 			$groups = TaskGroup::all();
 			$json = json_encode($groups);
 			break;
-		case 'list.create':
+		case 'group.create':
+			#debug($req_json);
 			$datum = json_decode($req_json);
+			#debug_foreach($datum);
 			$group = TaskGroup::with_obje($datum);
-			$result = $group->save();
-			$json = json_encode($result);
+			if ($group) {
+				$result = $group->save();
+				$json = json_encode($result);
+			}
 			break;
-		case 'list.update':
+		case 'group.update':
 			$data = json_decode($req_json);
 			$results = array();
 			foreach ($data as $datum) {
 				$group = TaskGroup::with_obje($datum);
-				$result = $group->save();
-				$results[] = $result;
+				if ($group) {
+					$result = $group->save();
+					$results[] = $result;
+				} else {
+					$results[] = null;
+				}
 			}
 			$json = json_encode($results);
 			break;
@@ -61,14 +69,26 @@ if ($cmd == 'html') {
 			$tasks = Task::all();
 			break;
 		case 'task.create':
-			$task = Task::from_json($req_json);
-			$task->save();
+			$datum = json_decode($req_json);
+			$task = Task::with_obje($datum);
+			if ($task) {
+				$result = $task->save();
+				$json = json_encode($result);
+			}
 			break;
 		case 'task.update':
-			$tasks = Task::from_json($req_json);
-			foreach ($tasks as $task) {
-				$task->save();
+			$data = json_decode($req_json);
+			$results = array();
+			foreach ($data as $datum) {
+				$task = Task::with_obje($datum);
+				if ($task) {
+					$result = $task->save();
+					$results[] = $result;
+				} else {
+					$results[] = null;
+				}
 			}
+			$json = json_encode($results);
 			break;
 		case 'task.migrate':
 			require_once('task.mig.php');

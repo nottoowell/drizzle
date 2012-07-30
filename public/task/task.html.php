@@ -295,7 +295,7 @@ var RemoteStorage = {
 		var callback_wrapper = function (json) { callback(JSON.parse(json)); };
 		switch (cmd) {
 			case 'group-list':
-				url = 'tasklist/list';
+				url = 'taskgroup/list';
 				do_ajax(url, null, callback_wrapper);
 				break;
 			case 'task-list':
@@ -311,11 +311,11 @@ var RemoteStorage = {
 		var callback_wrapper = function (json) { callback(JSON.parse(json)); };
 		switch (cmd) {
 			case 'group-create':
-				url = 'tasklist/create';
+				url = 'taskgroup/create';
 				do_ajax(url, data, callback_wrapper);
 				break;
 			case 'group-update':
-				url = 'tasklist/update';
+				url = 'taskgroup/update';
 				do_ajax(url, data, callback_wrapper);
 				break;
 			case 'task-create':
@@ -560,8 +560,8 @@ _.includes(TaskGroup, {
 	update: function (json) {
 		var self = this;
 		var param = json;
-		Storage.update('group-update', param, function (json) {
-			_.extends(param, json);
+		Storage.update('group-update', [param], function (json) {
+			_.extends(param, json[0]);
 			self.updated(param);
 		});
 	},
@@ -573,8 +573,8 @@ _.includes(TaskGroup, {
 		var self = this;
 		var param = this.to_json();
 		_.extends(param, {'dead': 'D'});
-		Storage.update('group-update', param, function (json) {
-			_.extends(param, json);
+		Storage.update('group-update', [param], function (json) {
+			_.extends(param, json[0]);
 			self.destroyed(param);
 		});
 	},

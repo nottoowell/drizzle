@@ -1,5 +1,7 @@
 <?php
 
+require_once('core/util.php');
+
 class DataAccess {
 	
 	const SO_ASC = 0;
@@ -12,9 +14,14 @@ class DataAccess {
 	}
 
 	protected function execute($sql, $params) {
+		#debug("DataAccess.execute()");
+		#debug($sql);
+		#debug_foreach($params);
+
 		$stmt = $this->prepare_and_bind($sql, $params);
 		if ($stmt->execute()) {
-			if (strpos(strtolower($sql), "insert") != FALSE) {
+			if (strpos(strtolower($sql), "insert") !== FALSE) {
+				#debug("call lastInsertRowID");
 				return $this->db->lastInsertRowID();
 			} else {
 				return 1;
@@ -49,9 +56,9 @@ class DataAccess {
 		} else {
 			foreach ($params as $key => $val) {
 				if (is_string($param->value)) {
-					$stmt->bindParam(":{$key}", $val, SQLITE3_TEXT);
+					$stmt->bindValue(":{$key}", $val, SQLITE3_TEXT);
 				} else {
-					$stmt->bindParam(":{$key}", $val);
+					$stmt->bindValue(":{$key}", $val);
 				}
 			}
 		}
