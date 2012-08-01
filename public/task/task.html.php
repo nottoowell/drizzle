@@ -806,7 +806,6 @@ function GroupsViewer() {}
 _.includes(GroupsViewer, {
 	groups: undefined,
 	attach_model: function (groups) {
-		confirm("GroupsViewer.attach_model");
 		this.groups = groups;
 		this.groups.bind('loaded', this.show, this);
 		this.groups.bind('created', this.show, this);
@@ -816,7 +815,6 @@ _.includes(GroupsViewer, {
 		this.groups = undefined;
 	},
 	init: function (groups) {
-		confirm("GroupsViewer.init");
 		if (groups) this.attach_model(groups);
 
 		this.$pane = $('div.taskgroups-show');
@@ -834,6 +832,7 @@ _.includes(GroupsViewer, {
 	bind: function () {
 		confirm("GroupsViewer.bind");
 		var $pane = this.$pane;
+		confirm(835);
 		var bindings = [
 			['click', 'button', 'open_editor'],
 			['click', 'div.add label', 'edit_new'],
@@ -841,13 +840,20 @@ _.includes(GroupsViewer, {
 			['blur', 'div.add input', 'hide_input'],
 			['click', 'ul#taskgroups-show-list label', 'picked']
 		];
+		confirm(843);
 		var self = this;
+		confirm(845);
 		for (var i = 0; i < bindings.length; i++) {
 			var binding = bindings[i];
 			var callback = binding[binding.length - 1];
 			//binding[binding.length - 1] = function () { self[callback].apply(self, arguments); };
-			binding[binding.length - 1] = self[callback].bind(self);
+			if (self[callback].bind)
+				binding[binding.length - 1] = self[callback].bind(self);
+			else
+				confirm("no func.bind");
+			confirm(854);
 			$pane.on.apply($pane, binding);
+			confirm(856);
 		}
 		confirm("bound");
 	},
