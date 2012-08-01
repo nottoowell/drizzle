@@ -964,7 +964,7 @@ _.includes(GroupsEditor, {
 	edit: function (e) {
 		this.hide_input();
 
-		var $label = $(e.srcElement);
+		var $label = $(e.srcElement).parent();
 		$label.addClass('inactive');
 		var $input = $label.siblings('input');
 		$input.val($label.html());
