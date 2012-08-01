@@ -846,6 +846,7 @@ _.includes(GroupsViewer, {
 			['blur', 'div.add input', 'hide_input'],
 			['click', 'ul#taskgroups-show-list label', 'picked']
 		];
+		confirm(Function.prototype.bind);
 		var self = this;
 		for (var i = 0; i < bindings.length; i++) {
 			var binding = bindings[i];
