@@ -132,7 +132,7 @@ div.add input.active {
 }
 
 /*
- * div#content > div.main > div#taskgroups-show
+ * div#content > div.main > div.taskgroups-show
  */
 
 #taskgroups-show-list li label {
@@ -140,7 +140,7 @@ div.add input.active {
 }
 
 /*
- * div#content > div.main > div#taskgroups-edit
+ * div#content > div.main > div.taskgroups-edit
  */
 
 #taskgroups-edit-list span {
@@ -162,10 +162,10 @@ div.add input.active {
 }
 
 /*
- * div#content > div.main > div#tasks-show
+ * div#content > div.main > div.tasks-show
  */
 
-#tasks-show div.add label {
+.tasks-show div.add {
 	clear: left;
 }
 
@@ -177,7 +177,7 @@ div.add input.active {
 }
 
 /*
- * div#content > div.main > div#tasks-edit
+ * div#content > div.main > div.tasks-edit
  */
 
 div.clear {
