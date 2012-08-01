@@ -270,6 +270,13 @@ function do_ajax(target, args, callback) {
 	_.extends = function (dst, module) {
 		extend(dst, module);
 	};
+	_.bind = function (func, ctx) {
+		if (func.bind === Function.prototype.bind) {
+			return = func.bind(self);
+		} else {
+			return function () { func.apply(ctx, arguments); };
+		}
+	};
 	_.event = {};
 	_.event._events = {};
 	_.event.on = function (event, callback) {
@@ -437,7 +444,7 @@ _.includes(Task, {
 		this.collection.destroyed(this);
 	},
 	toggle_done: function () {
-		this.update({'done':(this.done ? null : 'D')}, this.toggled_done.bind(this));
+		this.update({'done':(this.done ? null : 'D')}, _.bind(this.toggled_done, this));
 	},
 	toggled_done: function (json) {
 		_.extends(this, json);
@@ -832,7 +839,6 @@ _.includes(GroupsViewer, {
 	bind: function () {
 		confirm("GroupsViewer.bind");
 		var $pane = this.$pane;
-		confirm(835);
 		var bindings = [
 			['click', 'button', 'open_editor'],
 			['click', 'div.add label', 'edit_new'],
@@ -840,20 +846,13 @@ _.includes(GroupsViewer, {
 			['blur', 'div.add input', 'hide_input'],
 			['click', 'ul#taskgroups-show-list label', 'picked']
 		];
-		confirm(843);
 		var self = this;
-		confirm(845);
 		for (var i = 0; i < bindings.length; i++) {
 			var binding = bindings[i];
 			var callback = binding[binding.length - 1];
 			//binding[binding.length - 1] = function () { self[callback].apply(self, arguments); };
-			if (self[callback].bind)
-				binding[binding.length - 1] = self[callback].bind(self);
-			else
-				confirm("no func.bind");
-			confirm(854);
+			binding[binding.length - 1] = _.bind(self[callback], self);
 			$pane.on.apply($pane, binding);
-			confirm(856);
 		}
 		confirm("bound");
 	},
@@ -935,7 +934,7 @@ _.includes(GroupsEditor, {
 			var binding = bindings[i];
 			var callback = binding[binding.length - 1];
 			//binding[binding.length - 1] = function () { self[callback].apply(self, arguments); };
-			binding[binding.length - 1] = this[callback].bind(self);
+			binding[binding.length - 1] = _.bind(self[callback], self);
 			$pane.on.apply($pane, binding);
 		}
 	},
@@ -1030,7 +1029,7 @@ _.includes(TasksViewer, {
 			var binding = bindings[i];
 			var callback = binding[binding.length - 1];
 			//binding[binding.length - 1] = function () { self[callback].apply(self, arguments); };
-			binding[binding.length - 1] = this[callback].bind(self);
+			binding[binding.length - 1] = _.bind(self[callback], self);
 			$pane.on.apply($pane, binding);
 		}
 		this.bind = function () {};
@@ -1120,7 +1119,7 @@ _.includes(TasksEditor, {
 			var binding = bindings[i];
 			var callback = binding[binding.length - 1];
 			//binding[binding.length - 1] = function () { self[callback].apply(self, arguments); };
-			binding[binding.length - 1] = this[callback].bind(self);
+			binding[binding.length - 1] = _.bind(self[callback], self);
 			$pane.on.apply($pane, binding);
 		}
 		this.bind = function () {};
