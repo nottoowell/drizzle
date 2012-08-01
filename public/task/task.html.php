@@ -206,9 +206,6 @@ div.clear {
 <script type="text/javascript" src="https://ajax.aspnetcdn.com/ajax/jquery.templates/beta1/jquery.tmpl.min.js"></script>
 <script type="text/javascript" >
 
-alert("alert");
-confirm("confirm");
-
 // conflict with jQuery
 //var $ = function(id) { return document.getElementById(id); };
 
@@ -251,6 +248,8 @@ function do_ajax(target, args, callback) {
 	xmlhttp.send(args);
 	delete xmlhttp;
 }
+
+confirm("252");
 
 </script><script type="text/javascript">
 
@@ -296,6 +295,8 @@ function do_ajax(target, args, callback) {
 	};
 	exports._ = _;
 })(window);
+
+confirm("299");
 
 </script><script type="text/javascript">
 
@@ -386,6 +387,8 @@ var Storage = {};
 _.extends(Storage, RemoteStorage);
 //_.extends(Storage, LocalStorage);
 
+confirm("390");
+
 </script><script type="text/javascript">
 
 var Model = {
@@ -393,6 +396,8 @@ var Model = {
 
 var Collection = {
 };
+
+confirm("400");
 
 </script><script type="text/javascript">
 
@@ -744,6 +749,8 @@ _.includes(TaskGroups, {
 });
 _.extends(TaskGroups, {});
 
+confirm("752");
+
 </script><script type="text/javascript">
 
 
@@ -804,6 +811,8 @@ _.extends(TaskGroups, {});
 <script type="text/template" id="x-template-tasks-show-item"><li task_id="${task_id}"><input type="checkbox" {{if done}}checked{{/if}}><label {{if done}}class="done"{{/if}}>${name}</label></li></script>
 <script type="text/template" id="x-template-tasks-edit-item"><li task_id="${task_id}"><span>&#8861;</span><label {{if done}}class="done"{{/if}}>${name}</label><input type="text" data-action="edit"></li></script>
 <script type="text/javascript">
+
+confirm("815");
 
 function GroupsViewer() {}
 _.includes(GroupsViewer, {
@@ -1171,6 +1180,8 @@ _.includes(TasksEditor, {
 });
 _.extends(TasksEditor, {});
 
+confirm("1183");
+
 </script><script type="text/javascript">
 
 var groups = new TaskGroups();
@@ -1179,6 +1190,8 @@ var groups_editor = new GroupsEditor().init(groups);
 var tasks_viewer = new TasksViewer().init();
 var tasks_editor = new TasksEditor().init();
 groups.load();
+
+confirm("1194");
 
 </script>
 </body>
