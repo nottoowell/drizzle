@@ -855,7 +855,9 @@ _.includes(GroupsViewer, {
 			// binding[binding.length - 1] = _.bind(self[callback], self);
 			if (self[callback].bind === Function.prototype.bind) {
 				confirm(857);
-				binding[binding.length - 1] = self[callback].bind(self);
+				callback = self[callback].bind(self);
+				confirm(859);
+				binding[binding.length - 1] = callback; //self[callback].bind(self);
 			} else {
 				confirm(860);
 				binding[binding.length - 1] = function () { self[callback].apply(self, arguments); };
