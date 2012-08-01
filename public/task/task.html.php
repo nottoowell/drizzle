@@ -271,7 +271,7 @@ function do_ajax(target, args, callback) {
 		extend(dst, module);
 	};
 	_.bind = function (func, ctx) {
-		if (func.bind === Function.prototype.bind) {
+		if (Function.prototype.bind && func.bind === Function.prototype.bind) {
 			return func.bind(ctx);
 		} else {
 			return function () { func.apply(ctx, arguments); };
@@ -300,6 +300,8 @@ function do_ajax(target, args, callback) {
 	};
 	exports._ = _;
 })(window);
+
+confirm(Function.prototype.bind);
 
 </script><script type="text/javascript">
 
@@ -846,26 +848,16 @@ _.includes(GroupsViewer, {
 			['blur', 'div.add input', 'hide_input'],
 			['click', 'ul#taskgroups-show-list label', 'picked']
 		];
-		confirm(Function.prototype.bind);
 		var self = this;
 		for (var i = 0; i < bindings.length; i++) {
 			var binding = bindings[i];
 			var callback = binding[binding.length - 1];
 			//binding[binding.length - 1] = function () { self[callback].apply(self, arguments); };
 			confirm(854);
-			// binding[binding.length - 1] = _.bind(self[callback], self);
-			if (self[callback].bind === Function.prototype.bind) {
-				confirm(857);
-				callback = Function.prototype.bind.call(self[callback], self); //self[callback].bind(self);
-				confirm(859);
-				binding[binding.length - 1] = callback; //self[callback].bind(self);
-			} else {
-				confirm(860);
-				binding[binding.length - 1] = function () { self[callback].apply(self, arguments); };
-			}
-			confirm(863);
+			binding[binding.length - 1] = _.bind(self[callback], self);
+			confirm(857);
 			$pane.on.apply($pane, binding);
-			confirm(865);
+			confirm(859);
 		}
 		confirm("bound");
 	},
@@ -1195,7 +1187,6 @@ _.extends(TasksEditor, {});
 </script><script type="text/javascript">
 
 var groups = new TaskGroups();
-confirm("1174");
 var groups_viewer = new GroupsViewer().init(groups);
 confirm("1176");
 var groups_editor = new GroupsEditor().init(groups);
