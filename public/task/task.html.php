@@ -886,7 +886,7 @@ _.includes(GroupsViewer, {
 		this.$input.val('');
 	},
 	picked: function (e) {
-		this.groups.tasks_load($(e.srcElement).parent().attr('group_id'));
+		this.groups.tasks_load($(e.srcElement).parent('li').attr('group_id'));
 	},
 	open_tasks: function (tasks) {
 		tasks_viewer.attach_model(tasks);
@@ -954,7 +954,7 @@ _.includes(GroupsEditor, {
 		groups_viewer.show();
 	},
 	destroy: function (e) {
-		this.groups.destroy($(e.srcElement).parent().attr('group_id'));
+		this.groups.destroy($(e.srcElement).parent('li').attr('group_id'));
 	},
 	destroyed: function (group_id) {
 		this.$pane.find('ul#taskgroups-edit-list li[group_id="'+group_id+'"]').remove();
@@ -1072,7 +1072,7 @@ _.includes(TasksViewer, {
 		this.tasks.toggle_done($(e.srcElement).parent().attr('task_id'));
 	},
 	picked: function (e) {
-		this.tasks.edit_task($(e.srcElement).parent().attr('task_id'));
+		this.tasks.edit_task($(e.srcElement).parent('li').attr('task_id'));
 	},
 	open_task_editor: function () {}
 });
@@ -1146,7 +1146,7 @@ _.includes(TasksEditor, {
 		this.tasks.clear();
 	},
 	destroy: function (e) {
-		this.tasks.destroy($(e.srcElement).parent().attr('task_id'));
+		this.tasks.destroy($(e.srcElement).parent('li').attr('task_id'));
 	},
 	destroyed: function (task_id) {
 		this.$pane.find('ul#tasks-edit-list li[task_id="'+task_id+'"]').remove();
