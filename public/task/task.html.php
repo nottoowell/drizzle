@@ -206,6 +206,9 @@ div.clear {
 <script type="text/javascript" src="https://ajax.aspnetcdn.com/ajax/jquery.templates/beta1/jquery.tmpl.min.js"></script>
 <script type="text/javascript" >
 
+alert("alert");
+confirm("confirm");
+
 // conflict with jQuery
 //var $ = function(id) { return document.getElementById(id); };
 
