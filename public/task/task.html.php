@@ -796,10 +796,10 @@ _.extends(TaskGroups, {});
 		</div>
 	</div>
 </div>
-<script type="text/template" id="x-template-taskgroups-show-item"><li group_id="${group_id}"><label>${name}</label></li></script>
-<script type="text/template" id="x-template-taskgroups-edit-item"><li group_id="${group_id}"><span>&#8861;</span><label>${name}</label><input type="text" data-action="edit"></li></script>
-<script type="text/template" id="x-template-tasks-show-item"><li task_id="${task_id}"><input type="checkbox" {{if done}}checked{{/if}}><label {{if done}}class="done"{{/if}}>${name}</label></li></script>
-<script type="text/template" id="x-template-tasks-edit-item"><li task_id="${task_id}"><span>&#8861;</span><label {{if done}}class="done"{{/if}}>${name}</label><input type="text" data-action="edit"></li></script>
+<script type="text/x-jquery-tmpl" id="x-template-taskgroups-show-item"><li group_id="${group_id}"><label>${name}</label></li></script>
+<script type="text/x-jquery-tmpl" id="x-template-taskgroups-edit-item"><li group_id="${group_id}"><span>&#8861;</span><label>${name}</label><input type="text" data-action="edit"></li></script>
+<script type="text/x-jquery-tmpl" id="x-template-tasks-show-item"><li task_id="${task_id}"><input type="checkbox" {{if done}}checked{{/if}}><label {{if done}}class="done"{{/if}}>${name}</label></li></script>
+<script type="text/x-jquery-tmpl" id="x-template-tasks-edit-item"><li task_id="${task_id}"><span>&#8861;</span><label {{if done}}class="done"{{/if}}>${name}</label><input type="text" data-action="edit"></li></script>
 <script type="text/javascript">
 
 function GroupsViewer() {}
@@ -846,9 +846,10 @@ _.includes(GroupsViewer, {
 			var binding = bindings[i];
 			var callback = binding[binding.length - 1];
 			//binding[binding.length - 1] = function () { self[callback].apply(self, arguments); };
-			binding[binding.length - 1] = this[callback].bind(self);
+			binding[binding.length - 1] = self[callback].bind(self);
 			$pane.on.apply($pane, binding);
 		}
+		confirm("bound");
 	},
 	show: function () {
 		var $pane = this.$pane;
