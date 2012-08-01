@@ -272,7 +272,7 @@ function do_ajax(target, args, callback) {
 	};
 	_.bind = function (func, ctx) {
 		if (func.bind === Function.prototype.bind) {
-			return = func.bind(self);
+			return func.bind(self);
 		} else {
 			return function () { func.apply(ctx, arguments); };
 		}
