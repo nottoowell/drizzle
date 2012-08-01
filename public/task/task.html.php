@@ -219,11 +219,9 @@ function xprintln(s) {
 }
 
 function do_ajax(target, args, callback) {
-	confirm("do_ajax");
 	var uri = '/' + target;
 	var xmlhttp;
 	if (typeof XMLHttpRequest != "undefined") {
-		confirm("XMLHttpRequest");
 		xmlhttp = new XMLHttpRequest();
 	} else if (ActiveXObject) {
 		xmlhttp = new ActiveXObject('Msxml2.XMLHTTP');
@@ -232,7 +230,6 @@ function do_ajax(target, args, callback) {
 		}
 	}
 	if (!xmlhttp) {
-		confirm("no xhr");
 		return;
 	}
 	xmlhttp.open('POST', uri, true);
@@ -301,13 +298,10 @@ function do_ajax(target, args, callback) {
 	exports._ = _;
 })(window);
 
-confirm(Function.prototype.bind);
-
 </script><script type="text/javascript">
 
 var RemoteStorage = {
 	query: function (cmd, param, callback) {
-		confirm("RemoteStorage.query");
 		var method = 'GET';
 		var url = undefined;
 		var data = JSON.stringify(param);
@@ -682,14 +676,12 @@ _.includes(TaskGroups, {
 		}
 	},
 	load: function () {
-		confirm("TaskGroups.load");
 		var self = this;
 		Storage.query('group-list', null, function (json) {
 			self.loaded(json);
 		});
 	},
 	loaded: function (json) {
-		confirm("TaskGroups.loaded");
 		this.from_json(json);
 		if (this.events['loaded']) {
 			this.events['loaded']();
@@ -830,16 +822,13 @@ _.includes(GroupsViewer, {
 		this.$input = this.$pane.find('div.add input');
 		this.bind();
 
-		confirm("$.template");
 		$.template('template_taskgroups_show_item', $('#x-template-taskgroups-show-item').html());
-		confirm("$.template done");
 
 		return this;
 	},
 	$pane: undefined,
 	$input: undefined,
 	bind: function () {
-		confirm("GroupsViewer.bind");
 		var $pane = this.$pane;
 		var bindings = [
 			['click', 'button', 'open_editor'],
@@ -853,13 +842,9 @@ _.includes(GroupsViewer, {
 			var binding = bindings[i];
 			var callback = binding[binding.length - 1];
 			//binding[binding.length - 1] = function () { self[callback].apply(self, arguments); };
-			confirm(854);
 			binding[binding.length - 1] = _.bind(self[callback], self);
-			confirm(857);
 			$pane.on.apply($pane, binding);
-			confirm(859);
 		}
-		confirm("bound");
 	},
 	show: function () {
 		var $pane = this.$pane;
@@ -1188,16 +1173,10 @@ _.extends(TasksEditor, {});
 
 var groups = new TaskGroups();
 var groups_viewer = new GroupsViewer().init(groups);
-confirm("1176");
 var groups_editor = new GroupsEditor().init(groups);
-confirm("1178");
 var tasks_viewer = new TasksViewer().init();
-confirm("1180");
 var tasks_editor = new TasksEditor().init();
-confirm("1182");
 groups.load();
-
-confirm("1194");
 
 </script>
 </body>
