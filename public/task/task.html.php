@@ -249,8 +249,6 @@ function do_ajax(target, args, callback) {
 	delete xmlhttp;
 }
 
-confirm("252");
-
 </script><script type="text/javascript">
 
 (function (exports) {
@@ -295,8 +293,6 @@ confirm("252");
 	};
 	exports._ = _;
 })(window);
-
-confirm("299");
 
 </script><script type="text/javascript">
 
@@ -387,8 +383,6 @@ var Storage = {};
 _.extends(Storage, RemoteStorage);
 //_.extends(Storage, LocalStorage);
 
-confirm("390");
-
 </script><script type="text/javascript">
 
 var Model = {
@@ -396,8 +390,6 @@ var Model = {
 
 var Collection = {
 };
-
-confirm("400");
 
 </script><script type="text/javascript">
 
@@ -749,8 +741,6 @@ _.includes(TaskGroups, {
 });
 _.extends(TaskGroups, {});
 
-confirm("752");
-
 </script><script type="text/javascript">
 
 
@@ -811,8 +801,6 @@ confirm("752");
 <script type="text/template" id="x-template-tasks-show-item"><li task_id="${task_id}"><input type="checkbox" {{if done}}checked{{/if}}><label {{if done}}class="done"{{/if}}>${name}</label></li></script>
 <script type="text/template" id="x-template-tasks-edit-item"><li task_id="${task_id}"><span>&#8861;</span><label {{if done}}class="done"{{/if}}>${name}</label><input type="text" data-action="edit"></li></script>
 <script type="text/javascript">
-
-confirm("815");
 
 function GroupsViewer() {}
 _.includes(GroupsViewer, {
@@ -1180,15 +1168,18 @@ _.includes(TasksEditor, {
 });
 _.extends(TasksEditor, {});
 
-confirm("1183");
-
 </script><script type="text/javascript">
 
 var groups = new TaskGroups();
+confirm("1174");
 var groups_viewer = new GroupsViewer().init(groups);
+confirm("1176");
 var groups_editor = new GroupsEditor().init(groups);
+confirm("1178");
 var tasks_viewer = new TasksViewer().init();
+confirm("1180");
 var tasks_editor = new TasksEditor().init();
+confirm("1182");
 groups.load();
 
 confirm("1194");
