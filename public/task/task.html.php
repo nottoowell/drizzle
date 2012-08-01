@@ -1074,6 +1074,7 @@ _.includes(TasksViewer, {
 		this.tasks.toggle_done($(e.srcElement).parent().attr('task_id'));
 	},
 	picked: function (e) {
+		// TODO task editor, taskgroup picker
 		//this.tasks.edit_task($(e.srcElement).parent().attr('task_id'));
 		this.tasks.edit_task($(e.srcElement).parents('li').attr('task_id'));
 	},
@@ -1158,7 +1159,7 @@ _.includes(TasksEditor, {
 	edit: function (e) {
 		this.hide_input();
 
-		var $label = $(e.srcElement);
+		var $label = $(e.srcElement).parent();
 		$label.addClass('inactive');
 		var $input = $label.siblings('input');
 		$input.val($label.html());
