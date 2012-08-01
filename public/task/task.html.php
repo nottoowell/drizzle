@@ -852,14 +852,14 @@ _.includes(GroupsViewer, {
 			var callback = binding[binding.length - 1];
 			//binding[binding.length - 1] = function () { self[callback].apply(self, arguments); };
 			confirm(854);
-			binding[binding.length - 1] = _.bind(self[callback], self);
-			// if (self[callback].bind === Function.prototype.bind) {
-			// 	confirm(857);
-			// 	binding[binding.length - 1] = self[callback].bind(self);
-			// } else {
-			// 	confirm(860);
-			// 	binding[binding.length - 1] = function () { self[callback].apply(self, arguments); };
-			// }
+			// binding[binding.length - 1] = _.bind(self[callback], self);
+			if (self[callback].bind === Function.prototype.bind) {
+				confirm(857);
+				binding[binding.length - 1] = self[callback].bind(self);
+			} else {
+				confirm(860);
+				binding[binding.length - 1] = function () { self[callback].apply(self, arguments); };
+			}
 			confirm(863);
 			$pane.on.apply($pane, binding);
 			confirm(865);
