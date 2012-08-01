@@ -851,8 +851,11 @@ _.includes(GroupsViewer, {
 			var binding = bindings[i];
 			var callback = binding[binding.length - 1];
 			//binding[binding.length - 1] = function () { self[callback].apply(self, arguments); };
+			confirm(854);
 			binding[binding.length - 1] = _.bind(self[callback], self);
+			confirm(856);
 			$pane.on.apply($pane, binding);
+			confirm(858);
 		}
 		confirm("bound");
 	},
