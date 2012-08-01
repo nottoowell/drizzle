@@ -806,6 +806,7 @@ function GroupsViewer() {}
 _.includes(GroupsViewer, {
 	groups: undefined,
 	attach_model: function (groups) {
+		confirm("GroupsViewer.attach_model");
 		this.groups = groups;
 		this.groups.bind('loaded', this.show, this);
 		this.groups.bind('created', this.show, this);
@@ -815,19 +816,23 @@ _.includes(GroupsViewer, {
 		this.groups = undefined;
 	},
 	init: function (groups) {
+		confirm("GroupsViewer.init");
 		if (groups) this.attach_model(groups);
 
 		this.$pane = $('div.taskgroups-show');
 		this.$input = this.$pane.find('div.add input');
 		this.bind();
 
+		confirm("$.template");
 		$.template('template_taskgroups_show_item', $('#x-template-taskgroups-show-item').html());
+		confirm("$.template done");
 
 		return this;
 	},
 	$pane: undefined,
 	$input: undefined,
 	bind: function () {
+		confirm("GroupsViewer.bind");
 		var $pane = this.$pane;
 		var bindings = [
 			['click', 'button', 'open_editor'],
