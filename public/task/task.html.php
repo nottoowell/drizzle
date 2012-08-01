@@ -43,6 +43,11 @@ ul {
 	-webkit-padding-start: 10px;
 }
 
+a {
+	color: #808080;
+	text-decoration: none;
+}
+
 .left {
 	float: left;
 }
@@ -839,7 +844,7 @@ _.includes(GroupsViewer, {
 			['click', 'div.add label', 'edit_new'],
 			['keypress', 'div.add input', 'create_on_enter'],
 			['blur', 'div.add input', 'hide_input'],
-			['click', 'ul#taskgroups-show-list label', 'picked']
+			['click', 'ul#taskgroups-show-list label a', 'picked']
 		];
 		var self = this;
 		for (var i = 0; i < bindings.length; i++) {
