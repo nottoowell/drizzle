@@ -272,7 +272,7 @@ function do_ajax(target, args, callback) {
 	};
 	_.bind = function (func, ctx) {
 		if (func.bind === Function.prototype.bind) {
-			return func.bind(self);
+			return func.bind(ctx);
 		} else {
 			return function () { func.apply(ctx, arguments); };
 		}
@@ -853,9 +853,16 @@ _.includes(GroupsViewer, {
 			//binding[binding.length - 1] = function () { self[callback].apply(self, arguments); };
 			confirm(854);
 			binding[binding.length - 1] = _.bind(self[callback], self);
-			confirm(856);
+			// if (self[callback].bind === Function.prototype.bind) {
+			// 	confirm(857);
+			// 	binding[binding.length - 1] = self[callback].bind(self);
+			// } else {
+			// 	confirm(860);
+			// 	binding[binding.length - 1] = function () { self[callback].apply(self, arguments); };
+			// }
+			confirm(863);
 			$pane.on.apply($pane, binding);
-			confirm(858);
+			confirm(865);
 		}
 		confirm("bound");
 	},
