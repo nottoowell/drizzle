@@ -165,6 +165,10 @@ div.add input.active {
  * div#content > div.main > div#tasks-show
  */
 
+#tasks-show div.add {
+	clear: left;
+}
+
 #tasks-show-list li label {
 	cursor: pointer;
 }
