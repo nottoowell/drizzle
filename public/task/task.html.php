@@ -165,7 +165,7 @@ div.add input.active {
  * div#content > div.main > div#tasks-show
  */
 
-#tasks-show div.add {
+#tasks-show div.add label {
 	clear: left;
 }
 
