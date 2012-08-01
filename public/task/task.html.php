@@ -764,7 +764,7 @@ _.extends(TaskGroups, {});
 				<button type="button" class="right" data-action="edit">Edit</button>
 			</header>
 			<div class="add">
-				<label>+ New Group</label>
+				<label><a href="javascript:">+ New Group</a></label>
 				<input type="text" data-action="add-new">
 			</div>
 			<ul id="taskgroups-show-list"></ul>
@@ -783,7 +783,7 @@ _.extends(TaskGroups, {});
 				<button type="button" class="right" data-action="edit">Edit</button>
 			</header>
 			<div class="add">
-				<label>+ New Task</label>
+				<label><a href="javascript:">+ New Task</a></label>
 				<input type="text" data-action="add-new">
 			</div>
 			<ul id="tasks-show-list"></ul>
@@ -801,10 +801,10 @@ _.extends(TaskGroups, {});
 		</div>
 	</div>
 </div>
-<script type="text/x-jquery-tmpl" id="x-template-taskgroups-show-item"><li group_id="${group_id}"><label>${name}</label></li></script>
-<script type="text/x-jquery-tmpl" id="x-template-taskgroups-edit-item"><li group_id="${group_id}"><span>&#8861;</span><label>${name}</label><input type="text" data-action="edit"></li></script>
-<script type="text/x-jquery-tmpl" id="x-template-tasks-show-item"><li task_id="${task_id}"><input type="checkbox" {{if done}}checked{{/if}}><label {{if done}}class="done"{{/if}}>${name}</label></li></script>
-<script type="text/x-jquery-tmpl" id="x-template-tasks-edit-item"><li task_id="${task_id}"><span>&#8861;</span><label {{if done}}class="done"{{/if}}>${name}</label><input type="text" data-action="edit"></li></script>
+<script type="text/x-jquery-tmpl" id="x-template-taskgroups-show-item"><li group_id="${group_id}"><label><a href="javascript:">${name}</a></label></li></script>
+<script type="text/x-jquery-tmpl" id="x-template-taskgroups-edit-item"><li group_id="${group_id}"><span><a href="javascript:">&#8861;</a></span><label><a href="javascript:">${name}</a></label><input type="text" data-action="edit"></li></script>
+<script type="text/x-jquery-tmpl" id="x-template-tasks-show-item"><li task_id="${task_id}"><input type="checkbox" {{if done}}checked{{/if}}><label {{if done}}class="done"{{/if}}><a href="javascript:">${name}</a></label></li></script>
+<script type="text/x-jquery-tmpl" id="x-template-tasks-edit-item"><li task_id="${task_id}"><span><a href="javascript:">&#8861;</a></span><label {{if done}}class="done"{{/if}}><a href="javascript:">${name}</a></label><input type="text" data-action="edit"></li></script>
 <script type="text/javascript">
 
 function GroupsViewer() {}
