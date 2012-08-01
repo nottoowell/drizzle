@@ -219,17 +219,20 @@ function xprintln(s) {
 }
 
 function do_ajax(target, args, callback) {
+	confirm("do_ajax");
 	var uri = '/' + target;
 	var xmlhttp;
 	if (typeof XMLHttpRequest != "undefined") {
+		confirm("XMLHttpRequest");
 		xmlhttp = new XMLHttpRequest();
-	} else {
+	} else if (ActiveXObject) {
 		xmlhttp = new ActiveXObject('Msxml2.XMLHTTP');
 		if (!xmlhttp) {
 			xmlhttp = new ActiveXObject('Microsoft.XMLHTTP');
 		}
 	}
 	if (!xmlhttp) {
+		confirm("no xhr");
 		return;
 	}
 	xmlhttp.open('POST', uri, true);
@@ -295,6 +298,7 @@ function do_ajax(target, args, callback) {
 
 var RemoteStorage = {
 	query: function (cmd, param, callback) {
+		confirm("RemoteStorage.query");
 		var method = 'GET';
 		var url = undefined;
 		var data = JSON.stringify(param);
@@ -669,12 +673,14 @@ _.includes(TaskGroups, {
 		}
 	},
 	load: function () {
+		confirm("TaskGroups.load");
 		var self = this;
 		Storage.query('group-list', null, function (json) {
 			self.loaded(json);
 		});
 	},
 	loaded: function (json) {
+		confirm("TaskGroups.loaded");
 		this.from_json(json);
 		if (this.events['loaded']) {
 			this.events['loaded']();
@@ -1170,7 +1176,6 @@ var groups_editor = new GroupsEditor().init(groups);
 var tasks_viewer = new TasksViewer().init();
 var tasks_editor = new TasksEditor().init();
 groups.load();
-
 
 </script>
 </body>
