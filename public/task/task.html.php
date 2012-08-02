@@ -808,8 +808,8 @@ _.extends(TaskGroups, {});
 </div><!-- &Xi; &equiv; &oplus; &#10006; &times; &minus; -->
 <script type="text/x-jquery-tmpl" id="x-template-taskgroups-show-item"><li group_id="${group_id}"><label><a href="javascript:">${name}</a></label></li></script>
 <script type="text/x-jquery-tmpl" id="x-template-taskgroups-edit-item"><li group_id="${group_id}"><span><a href="javascript:">&#10006;</a></span> <label><a href="javascript:">${name}</a></label><input type="text" data-action="edit"></li></script>
-<script type="text/x-jquery-tmpl" id="x-template-tasks-show-item"><li task_id="${task_id}"><span><a href="javascript:">&#times;</a></span> <input type="checkbox" {{if done}}checked{{/if}}><label {{if done}}class="done"{{/if}}><a href="javascript:">${name}</a></label></li></script>
-<script type="text/x-jquery-tmpl" id="x-template-tasks-edit-item"><li task_id="${task_id}"><span><a href="javascript:">&#minus;</a></span> <label {{if done}}class="done"{{/if}}><a href="javascript:">${name}</a></label><input type="text" data-action="edit"></li></script>
+<script type="text/x-jquery-tmpl" id="x-template-tasks-show-item"><li task_id="${task_id}"><span><a href="javascript:">&times;</a></span> <input type="checkbox" {{if done}}checked{{/if}}><label {{if done}}class="done"{{/if}}><a href="javascript:">${name}</a></label></li></script>
+<script type="text/x-jquery-tmpl" id="x-template-tasks-edit-item"><li task_id="${task_id}"><span><a href="javascript:">&minus;</a></span> <label {{if done}}class="done"{{/if}}><a href="javascript:">${name}</a></label><input type="text" data-action="edit"></li></script>
 <script type="text/javascript">
 
 function GroupsViewer() {}
