@@ -152,6 +152,19 @@ div.add input.active {
 	cursor: pointer;
 }
 
+#taskgroups-edit-list li:nth-child(1) span {
+	color: #dc143c;
+}
+#taskgroups-edit-list li:nth-child(2) span {
+	color: #b22222;
+}
+#taskgroups-edit-list li:nth-child(3) span {
+	color: #ff4500;
+}
+#taskgroups-edit-list li:nth-child(4) span {
+	color: #ff6347;
+}
+
 #taskgroups-edit-list label {
 	display: inline;
 }
@@ -191,6 +204,16 @@ div.clear {
 
 #tasks-edit-list span {
 	cursor: pointer;
+}
+
+#tasks-edit-list li:nth-child(1) span {
+	color: #ff4d4d;
+}
+#tasks-edit-list li:nth-child(2) span {
+	color: #ff3300;
+}
+#tasks-edit-list li:nth-child(3) span {
+	color: #cc0000;
 }
 
 #tasks-edit-list label {
@@ -805,11 +828,11 @@ _.extends(TaskGroups, {});
 			<ul id="tasks-edit-list"></ul>
 		</div>
 	</div>
-</div><!-- &Xi; &equiv; &oplus; &#10006; &times; &minus; -->
+</div><!-- &Xi; &equiv; -->
 <script type="text/x-jquery-tmpl" id="x-template-taskgroups-show-item"><li group_id="${group_id}"><label><a href="javascript:">${name}</a></label></li></script>
 <script type="text/x-jquery-tmpl" id="x-template-taskgroups-edit-item"><li group_id="${group_id}"><span><a href="javascript:">&#10006;</a></span> <label><a href="javascript:">${name}</a></label><input type="text" data-action="edit"></li></script>
-<script type="text/x-jquery-tmpl" id="x-template-tasks-show-item"><li task_id="${task_id}"><span><a href="javascript:">&times;</a></span> <input type="checkbox" {{if done}}checked{{/if}}><label {{if done}}class="done"{{/if}}><a href="javascript:">${name}</a></label></li></script>
-<script type="text/x-jquery-tmpl" id="x-template-tasks-edit-item"><li task_id="${task_id}"><span><a href="javascript:">&minus;</a></span> <label {{if done}}class="done"{{/if}}><a href="javascript:">${name}</a></label><input type="text" data-action="edit"></li></script>
+<script type="text/x-jquery-tmpl" id="x-template-tasks-show-item"><li task_id="${task_id}"><input type="checkbox" {{if done}}checked{{/if}}><label {{if done}}class="done"{{/if}}><a href="javascript:">${name}</a></label></li></script>
+<script type="text/x-jquery-tmpl" id="x-template-tasks-edit-item"><li task_id="${task_id}"><span><a href="javascript:">&#10006;</a></span> <label {{if done}}class="done"{{/if}}><a href="javascript:">${name}</a></label><input type="text" data-action="edit"></li></script>
 <script type="text/javascript">
 
 function GroupsViewer() {}
