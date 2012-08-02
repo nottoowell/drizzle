@@ -886,8 +886,8 @@ _.includes(GroupsViewer, {
 		this.$input.val('');
 	},
 	picked: function (e) {
-		//this.groups.tasks_load($(e.srcElement).parent().attr('group_id'));
-		this.groups.tasks_load($(e.srcElement).parents('li').attr('group_id'));
+		//this.groups.tasks_load($(e.target).parent().attr('group_id'));
+		this.groups.tasks_load($(e.target).parents('li').attr('group_id'));
 	},
 	open_tasks: function (tasks) {
 		tasks_viewer.attach_model(tasks);
@@ -955,8 +955,8 @@ _.includes(GroupsEditor, {
 		groups_viewer.show();
 	},
 	destroy: function (e) {
-		//this.groups.destroy($(e.srcElement).parent().attr('group_id'));
-		this.groups.destroy($(e.srcElement).parents('li').attr('group_id'));
+		//this.groups.destroy($(e.target).parent().attr('group_id'));
+		this.groups.destroy($(e.target).parents('li').attr('group_id'));
 	},
 	destroyed: function (group_id) {
 		this.$pane.find('ul#taskgroups-edit-list li[group_id="'+group_id+'"]').remove();
@@ -964,16 +964,17 @@ _.includes(GroupsEditor, {
 	edit: function (e) {
 		this.hide_input();
 
-		var $label = $(e.srcElement).parent();
+		var $target = $(e.target);
+		var $label = $target.parent();
 		$label.addClass('inactive');
 		var $input = $label.siblings('input');
-		$input.val($label.html());
+		$input.val($target.html());
 		$input.addClass('active');
 		$input.focus();
 	},
 	update_on_enter: function (e) {
 		if (e.keyCode != 13) return;
-		$input = $(e.srcElement);
+		$input = $(e.target);
 		if (! $input.val()) return;
 
 		this.groups.update({'group_id': $input.parent().attr('group_id'), 'name': $input.val()});
@@ -1071,12 +1072,12 @@ _.includes(TasksViewer, {
 		this.$input.val('');
 	},
 	toggle_done: function (e) {
-		this.tasks.toggle_done($(e.srcElement).parent().attr('task_id'));
+		this.tasks.toggle_done($(e.target).parent().attr('task_id'));
 	},
 	picked: function (e) {
 		// TODO task editor, taskgroup picker
-		//this.tasks.edit_task($(e.srcElement).parent().attr('task_id'));
-		this.tasks.edit_task($(e.srcElement).parents('li').attr('task_id'));
+		//this.tasks.edit_task($(e.target).parent().attr('task_id'));
+		this.tasks.edit_task($(e.target).parents('li').attr('task_id'));
 	},
 	open_task_editor: function () {}
 });
@@ -1150,8 +1151,8 @@ _.includes(TasksEditor, {
 		this.tasks.clear();
 	},
 	destroy: function (e) {
-		//this.tasks.destroy($(e.srcElement).parent().attr('task_id'));
-		this.tasks.destroy($(e.srcElement).parents('li').attr('task_id'));
+		//this.tasks.destroy($(e.target).parent().attr('task_id'));
+		this.tasks.destroy($(e.target).parents('li').attr('task_id'));
 	},
 	destroyed: function (task_id) {
 		this.$pane.find('ul#tasks-edit-list li[task_id="'+task_id+'"]').remove();
@@ -1159,16 +1160,17 @@ _.includes(TasksEditor, {
 	edit: function (e) {
 		this.hide_input();
 
-		var $label = $(e.srcElement).parent();
+		var $target = $(e.target);
+		var $label = $target.parent();
 		$label.addClass('inactive');
 		var $input = $label.siblings('input');
-		$input.val($label.html());
+		$input.val($target.html());
 		$input.addClass('active');
 		$input.focus();
 	},
 	update_on_enter: function (e) {
 		if (e.keyCode != 13) return;
-		var $input = $(e.srcElement);
+		var $input = $(e.target);
 		if (! $input.val()) return;
 
 		this.groups.update({'task_id': $input.parent().attr('task_id'), 'name': $input.val()});
