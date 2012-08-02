@@ -145,7 +145,8 @@ div.add input {
 div.add input.active {
 	display: inline;
 
-	max-width: 140px;
+	width: 120px;
+	max-width: 120px;
 }
 
 .main ul {
