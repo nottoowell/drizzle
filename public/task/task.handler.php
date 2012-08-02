@@ -39,6 +39,7 @@ if ($cmd == 'html') {
 	switch ($cmd) {
 		case 'group.list':
 			$groups = TaskGroup::all();
+			if (empty($groups)) $groups = array();
 			$json = json_encode($groups);
 			break;
 		case 'group.create':
@@ -69,6 +70,7 @@ if ($cmd == 'html') {
 			$datum = json_decode($req_json);
 			#debug_foreach($datum);
 			$tasks = Task::all($datum->group_id);
+			if (empty($tasks)) $tasks = array();
 			$json = json_encode($tasks);
 			break;
 		case 'task.create':

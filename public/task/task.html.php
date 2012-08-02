@@ -413,7 +413,9 @@ var Collection = {
 
 </script><script type="text/javascript">
 
-function Task() {}
+function Task(collection) {
+	this.collection = collection;
+}
 _.includes(Task, {
 	collection: undefined,
 	from_json: function (json) {
@@ -466,25 +468,28 @@ _.includes(Task, {
 });
 _.extends(Task, {});
 
-function Tasks() {}
+function Tasks(group) {
+	this.models = [];
+	this.group = group;
+	this.events = {};
+}
 _.includes(Tasks, {
 	T: Task,
-	models: [],
+	models: undefined,
 	group: undefined,
 	append: function (task) {
 		this.models.push(task);
-		task.collection = this;
 		return this;
 	},
 	prepend: function (task) {
 		this.models.unshift(task);
-		task.collection = this;
 		return this;
 	},
 	remove: function (task) {
 		for (var i = 0; i < this.models.length; i++) {
 			var model = this.models[i];
 			if (model.task_id == task.task_id) {
+				model.collection = undefined;
 				this.models.splice(i, 1);
 			}
 		}
@@ -586,14 +591,14 @@ _.includes(Tasks, {
 			this.events['cleared']();
 		}
 	},
-	events: {},
+	events: undefined,
 	bind: function (name, callback, ctx) {
 		this.events[name] = function () { callback.apply(ctx, arguments); };
 	},
 	from_json: function (json) {
 		if (json) {
 			for (var i = 0; i < json.length; i++) {
-				this.append(new this.T().from_json(json[i]));
+				this.append(new this.T(this).from_json(json[i]));
 			}
 		};
 		return this;
@@ -601,7 +606,9 @@ _.includes(Tasks, {
 });
 _.extends(Tasks, {});
 
-function TaskGroup() {}
+function TaskGroup(collection) {
+	this.collection = collection;
+}
 _.includes(TaskGroup, {
 	collection: undefined,
 	from_json: function (json) {
@@ -643,9 +650,8 @@ _.includes(TaskGroup, {
 		if (this.tasks) {
 			this.tasks_loaded();
 		} else {
-			var tasks = this.tasks = new Tasks();
-			tasks.group = this;
-			tasks.load();
+			this.tasks = new Tasks(this);
+			this.tasks.load();
 		}
 	},
 	tasks_loaded: function () {
@@ -660,18 +666,17 @@ _.includes(TaskGroups, {
 	models: [],
 	append: function (group) {
 		this.models.push(group);
-		group.collection = this;
 		return this;
 	},
 	prepend: function (group) {
 		this.models.unshift(group);
-		group.collection = this;
 		return this;
 	},
 	remove: function (group) {
 		for (var i = 0; i < this.models.length; i++) {
 			var model = this.models[i];
 			if (model.group_id == group.group_id) {
+				model.collection = undefined;
 				this.models.splice(i, 1);
 			}
 		}
@@ -752,7 +757,7 @@ _.includes(TaskGroups, {
 	},
 	from_json: function (json) {
 		for (var i = 0; i < json.length; i++) {
-			this.append(new this.T().from_json(json[i]));
+			this.append(new this.T(this).from_json(json[i]));
 		}
 		return this;
 	}
@@ -1185,7 +1190,7 @@ _.includes(TasksEditor, {
 		var $input = $(e.target);
 		if (! $input.val()) return;
 
-		this.groups.update({'task_id': $input.parent().attr('task_id'), 'name': $input.val()});
+		this.tasks.update({'task_id': $input.parent().attr('task_id'), 'name': $input.val()});
 		$input.val('');
 		this.hide_input();
 	},
