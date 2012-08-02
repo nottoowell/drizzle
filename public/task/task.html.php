@@ -142,8 +142,7 @@ div.add {
 div.add input {
 	display: none;
 
-	width: 120px;
-	max-width: 160px;
+	width: 160px;
 }
 div.add input.active {
 	display: inline;
