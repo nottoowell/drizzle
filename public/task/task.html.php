@@ -141,6 +141,8 @@ div.add {
 
 div.add input {
 	display: none;
+
+	max-width: 200px;
 }
 div.add input.active {
 	display: inline;
@@ -180,6 +182,10 @@ div.add input.active {
 
 #taskgroups-edit-list span {
 	cursor: pointer;
+
+	font-size: 12pt;
+
+	margin-right: 5px;
 }
 
 #taskgroups-edit-list span a {
@@ -228,6 +234,10 @@ div.clear {
 
 #tasks-edit-list span {
 	cursor: pointer;
+
+	font-size: 12pt;
+
+	margin-right: 5px;
 }
 
 #tasks-edit-list span a {
