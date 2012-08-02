@@ -142,7 +142,7 @@ div.add {
 div.add input {
 	display: none;
 
-	width: 160px;
+	width: 150px;
 }
 div.add input.active {
 	display: inline;
