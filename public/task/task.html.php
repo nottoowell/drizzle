@@ -133,7 +133,7 @@ a {
 }
 
 div.add {
-	height: 30px;
+	/* height: 30px; */
 	line-height: 30px;
 
 	padding-left: 10px;
@@ -142,7 +142,7 @@ div.add {
 div.add input {
 	display: none;
 
-	width: 150px;
+	/* width: 150px; */
 }
 div.add input.active {
 	display: inline;
