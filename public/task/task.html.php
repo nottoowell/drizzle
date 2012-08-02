@@ -152,17 +152,8 @@ div.add input.active {
 	cursor: pointer;
 }
 
-#taskgroups-edit-list li:nth-child(1) span a {
-	color: #dc143c;
-}
-#taskgroups-edit-list li:nth-child(2) span a {
-	color: #b22222;
-}
-#taskgroups-edit-list li:nth-child(3) span a {
-	color: #ff4500;
-}
-#taskgroups-edit-list li:nth-child(4) span a {
-	color: #ff6347;
+#taskgroups-edit-list span a {
+	color: #cc0000;
 }
 
 #taskgroups-edit-list label {
@@ -206,13 +197,7 @@ div.clear {
 	cursor: pointer;
 }
 
-#tasks-edit-list li:nth-child(1) span a {
-	color: #ff4d4d;
-}
-#tasks-edit-list li:nth-child(2) span a {
-	color: #ff3300;
-}
-#tasks-edit-list li:nth-child(3) span a {
+#tasks-edit-list span a {
 	color: #cc0000;
 }
 
@@ -942,7 +927,7 @@ _.includes(GroupsEditor, {
 		return this;
 	},
 	$pane: undefined,
-	$input: undefined,
+	//$input: undefined,
 	bind: function () {
 		var $pane = this.$pane;
 		var bindings = [
@@ -1122,6 +1107,7 @@ _.includes(TasksEditor, {
 		if (tasks) this.attach_model(tasks);
 
 		this.$pane = $('div.tasks-edit');
+		this.$h2 = this.$pane.find('h2');
 		this.bind();
 
 		$.template('template_tasks_edit_item', $('#x-template-tasks-edit-item').html());
@@ -1129,7 +1115,8 @@ _.includes(TasksEditor, {
 		return this;
 	},
 	$pane: undefined,
-	$input: undefined,
+	//$input: undefined,
+	$h2: undefined,
 	bind: function () {
 		var $pane = this.$pane;
 		var bindings = [
@@ -1153,6 +1140,8 @@ _.includes(TasksEditor, {
 	},
 	show: function () {
 		var $pane = this.$pane;
+
+		this.$h2.html(this.tasks.group.name);
 		
 		var $ul = $pane.find('ul#tasks-edit-list').html('');
 		for (var i = 0; i < this.tasks.length(); i++) {
