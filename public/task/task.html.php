@@ -40,6 +40,8 @@ div {
 ul {
 	list-style-type: none;
 
+	line-height: 120%;
+
 	-webkit-padding-start: 10px;
 }
 
@@ -63,6 +65,8 @@ a {
 	/* overflow: hidden; */
 	height: 40px;
 	line-height: 40px;
+
+	text-align: right;
 }
 
 #title h1 {
@@ -127,6 +131,10 @@ a {
 	line-height: 30px;
 
 	text-align: center;
+}
+
+div.add {
+	line-height: 120%;
 }
 
 div.add input {
