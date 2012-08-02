@@ -152,16 +152,16 @@ div.add input.active {
 	cursor: pointer;
 }
 
-#taskgroups-edit-list li:nth-child(1) span {
+#taskgroups-edit-list li:nth-child(1) span a {
 	color: #dc143c;
 }
-#taskgroups-edit-list li:nth-child(2) span {
+#taskgroups-edit-list li:nth-child(2) span a {
 	color: #b22222;
 }
-#taskgroups-edit-list li:nth-child(3) span {
+#taskgroups-edit-list li:nth-child(3) span a {
 	color: #ff4500;
 }
-#taskgroups-edit-list li:nth-child(4) span {
+#taskgroups-edit-list li:nth-child(4) span a {
 	color: #ff6347;
 }
 
@@ -206,13 +206,13 @@ div.clear {
 	cursor: pointer;
 }
 
-#tasks-edit-list li:nth-child(1) span {
+#tasks-edit-list li:nth-child(1) span a {
 	color: #ff4d4d;
 }
-#tasks-edit-list li:nth-child(2) span {
+#tasks-edit-list li:nth-child(2) span a {
 	color: #ff3300;
 }
-#tasks-edit-list li:nth-child(3) span {
+#tasks-edit-list li:nth-child(3) span a {
 	color: #cc0000;
 }
 
