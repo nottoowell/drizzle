@@ -141,11 +141,11 @@ div.add {
 
 div.add input {
 	display: none;
-
-	max-width: 150px;
 }
 div.add input.active {
 	display: inline;
+
+	max-width: 140px;
 }
 
 .main ul {
