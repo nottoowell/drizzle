@@ -34,15 +34,7 @@ h2 {
 }
 
 div {
-	border: 1px dotted #808080;
-}
-
-ul {
-	list-style-type: none;
-
-	line-height: 120%;
-
-	-webkit-padding-start: 10px;
+	border: 0px dotted #808080;
 }
 
 a {
@@ -66,6 +58,8 @@ a {
 	height: 40px;
 	line-height: 40px;
 
+	max-width: 480px;
+	
 	text-align: right;
 }
 
@@ -112,6 +106,8 @@ a {
 	-webkit-box-flex: 1;
 	-moz-box-flex: 1;
 	box-flex: 1;
+
+	margin: 0px 10px;
 }
 
 .main > div {
@@ -131,17 +127,43 @@ a {
 	line-height: 30px;
 
 	text-align: center;
+
+	border-top: 1px solid #808080;
+	border-bottom: 1px solid #808080;
 }
 
 div.add {
-	line-height: 120%;
+	height: 30px;
+	line-height: 30px;
+
+	padding-left: 10px;
 }
 
 div.add input {
 	display: none;
 }
 div.add input.active {
-	display: block;
+	display: inline;
+}
+
+.main ul {
+	list-style-type: none;
+
+	-webkit-padding-start: 0px;
+	-webkit-margin-before: 0px;
+	-webkit-margin-after: 0px;
+}
+
+.main li {
+	border-bottom: 1px dotted #404040;
+
+	height: 30px;
+	line-height: 30px;
+
+	padding-left: 10px;
+}
+.main li:first-child {
+	border-top: 1px dotted #404040;
 }
 
 /*
@@ -198,6 +220,9 @@ div.add input.active {
  */
 
 div.clear {
+	height: 30px;
+	line-height: 30px;
+
 	text-align: center;
 }
 
@@ -212,7 +237,7 @@ div.clear {
 #tasks-edit-list label {
 	display: inline;
 }
-#tasks-edit-list li label.done {
+#tasks-edit-list label.done {
 	text-decoration: line-through;
 }
 #tasks-edit-list label.inactive {
