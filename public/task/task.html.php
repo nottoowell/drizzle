@@ -751,6 +751,9 @@ _.includes(TaskGroups, {
 		if (this.events['loaded']) {
 			this.events['loaded']();
 		}
+		if (this.length() > 0) {
+			this.tasks_load(this.get_at(0).group_id);
+		}
 	},
 	create: function (json) {
 		var self = this;
