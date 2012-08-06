@@ -509,15 +509,15 @@ var LocalStorage = {
 		switch (cmd) {
 			case 'group-list':
 				json = [];
-				json.push({'group_id':1, 'name':'리스트1'});
-				json.push({'group_id':2, 'name':'리스트2'});
-				json.push({'group_id':3, 'name':'리스트3'});
+				json.push({'group_id':1, 'name':'리스??'});
+				json.push({'group_id':2, 'name':'리스??'});
+				json.push({'group_id':3, 'name':'리스??'});
 				break;
 			case 'task-list':
 				json = [];
-				json.push({'group_id':1, 'task_id':11, 'name':'고구마'});
-				json.push({'group_id':1, 'task_id':12, 'name':'고도리'});
-				json.push({'group_id':1, 'task_id':13, 'name':'고사리'});
+				json.push({'group_id':1, 'task_id':11, 'name':'고구�?});
+				json.push({'group_id':1, 'task_id':12, 'name':'고도�?});
+				json.push({'group_id':1, 'task_id':13, 'name':'고사�?});
 				break;
 		}
 		callback(json);
@@ -1770,10 +1770,6 @@ _.includes(TasksViewer, {
 		this.tasks.toggle_done($(e.target).parent().attr('task_id'));
 	},
 	picked: function (e) {
-		// TODO task editor, taskgroup picker
-		//this.tasks.edit_task($(e.target).parent().attr('task_id'));
-		//this.tasks.edit_task($(e.target).parents('li').attr('task_id'));
-
 		var task = this.tasks.get($(e.target).parents('li').attr('task_id'));
 		if (task) {
 			task_editor.attach_model(task);
