@@ -39,6 +39,7 @@ if ($cmd == 'html') {
 	switch ($cmd) {
 		case 'group.list':
 			$groups = TaskGroup::all();
+			if (empty($groups)) $groups = array();
 			$json = json_encode($groups);
 			break;
 		case 'group.create':
@@ -69,6 +70,7 @@ if ($cmd == 'html') {
 			$datum = json_decode($req_json);
 			#debug_foreach($datum);
 			$tasks = Task::all($datum->group_id);
+			if (empty($tasks)) $tasks = array();
 			$json = json_encode($tasks);
 			break;
 		case 'task.create':
@@ -78,16 +80,20 @@ if ($cmd == 'html') {
 			$task = Task::with_obje($datum);
 			if ($task) {
 				$result = $task->save();
+				$task->note()->save();
 				$json = json_encode($result);
 			}
 			break;
 		case 'task.update':
+			debug($req_json);
 			$data = json_decode($req_json);
 			$results = array();
 			foreach ($data as $datum) {
+				debug_foreach($datum);
 				$task = Task::with_obje($datum);
 				if ($task) {
 					$result = $task->save();
+					$task->note()->save();
 					$results[] = $result;
 				} else {
 					$results[] = null;

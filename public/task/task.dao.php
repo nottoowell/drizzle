@@ -41,7 +41,7 @@ class TaskDAO extends DataAccess {
 				FROM t
 				WHERE dead IS NULL AND group_id = :group_id
 				ORDER BY task_id DESC";
-		
+
 		$params = (object) array();
 		$params->group_id = $gid;
 		
@@ -70,6 +70,48 @@ class TaskDAO extends DataAccess {
 		$sql = "UPDATE t SET {$columns} WHERE task_id = :task_id";
 		#debug($sql);
 		return $this->execute($sql, $group);
+	}
+}
+
+class TaskHasNoteDAO extends DataAccess {
+	
+	function create($note) {
+		$sql = "INSERT INTO thn (task_id, note_id) VALUES (:task_id, :note_id)";
+		return $this->execute($sql, $note);
+	}
+}
+
+class TaskNoteDAO extends DataAccess {
+
+	function find($tid) {
+		$sql = "SELECT n.note_id AS note_id, n.note AS note
+				FROM thn, n
+				WHERE thn.task_id = :task_id AND thn.note_id = n.note_id AND n.dead IS NULL";
+		#$sql = "SELECT n.note_id AS note_id, n.note AS note
+		#		FROM thn INNER JOIN n ON thn.note_id = n.note_id
+		#		WHERE thn.task_id = :task_id AND n.dead IS NULL";
+		#debug($sql);
+		#debug($tid);
+
+		$params = (object) array();
+		$params->task_id = $tid;
+		
+		return $this->query($sql, $params);
+	}
+
+	function create($note) {
+		$sql = "INSERT INTO n (note) VALUES (:note)";
+		return $this->execute($sql, $note);
+	}
+
+	function update($note) {
+		$sql = "UPDATE n SET note = :note WHERE note_id = :note_id";
+		return $this->execute($sql, $note);
+	}
+
+	function destroy($note) {
+		$sql = "UPDATE n SET dead = 'D' WHERE note_id = :note_id";
+		return $this->execute($sql, $note);
 	}
 }
 
