@@ -509,15 +509,15 @@ var LocalStorage = {
 		switch (cmd) {
 			case 'group-list':
 				json = [];
-				json.push({'group_id':1, 'name':'리스??'});
-				json.push({'group_id':2, 'name':'리스??'});
-				json.push({'group_id':3, 'name':'리스??'});
+				json.push({'group_id':1, 'name':'리스트1'});
+				json.push({'group_id':2, 'name':'리스트2'});
+				json.push({'group_id':3, 'name':'리스트3'});
 				break;
 			case 'task-list':
 				json = [];
-				json.push({'group_id':1, 'task_id':11, 'name':'고구�?});
-				json.push({'group_id':1, 'task_id':12, 'name':'고도�?});
-				json.push({'group_id':1, 'task_id':13, 'name':'고사�?});
+				json.push({'group_id':1, 'task_id':11, 'name':'고구마'});
+				json.push({'group_id':1, 'task_id':12, 'name':'고도리'});
+				json.push({'group_id':1, 'task_id':13, 'name':'고사리'});
 				break;
 		}
 		callback(json);
@@ -1934,11 +1934,6 @@ _.includes(TaskEditor, {
 		var bindings = [
 			['click', 'button[data-action="done"]', 'open_viewer'],
 			['click', 'button[data-action="groups"]', 'show_group_picker'],
-		// 	['click', 'div.add label', 'edit_new'],
-		// 	['keypress', 'div.add input', 'create_on_enter'],
-		// 	['blur', 'div.add input', 'hide_input'],
-		// 	['click', 'ul#tasks-show-list input', 'toggle_done'],
-		// 	//['click', 'ul#tasks-show-list label', 'picked']
 			['click', 'ul#group-pick-list a', 'picked'],
 			['click', 'button[data-action="close"]', 'hide_group_picker'],
 		];
