@@ -44,7 +44,7 @@ CREATE TABLE IF NOT EXISTS g (
 	group_id INTEGER PRIMARY KEY,
 	name TEXT,
 	dead TEXT(1) DEFAULT NULL,
-	psid INTEGER,
+	sid INTEGER,
 	ctime DATETIME,
 	mtime DATETIME
 )
@@ -70,7 +70,7 @@ CREATE TABLE IF NOT EXISTS t (
 	dead TEXT(1) DEFAULT NULL,
 	done TEXT(1) DEFAULT NULL,
 	pid INTEGER,
-	psid INTEGER,
+	sid INTEGER,
 	ctime DATETIME,
 	mtime DATETIME,
 	gcal_id TEXT(40),

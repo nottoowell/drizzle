@@ -6,7 +6,7 @@ require_once('core/util.php');
 class TaskGroupDAO extends DataAccess {
 
 	public function find_all() {
-		$sql = "SELECT group_id, name, dead, psid, ctime, mtime FROM g WHERE dead IS NULL";
+		$sql = "SELECT group_id, name, dead, sid, ctime, mtime FROM g WHERE dead IS NULL";
 		
 		$params = (object) array();
 		
@@ -28,7 +28,7 @@ class TaskGroupDAO extends DataAccess {
 		$sql = "UPDATE g SET" .
 				" name = :name," .
 				" dead = :dead," .
-				" psid = :psid" .
+				" sid = :sid" .
 				" WHERE group_id = :group_id";
 		return $this->execute($sql, $group);
 	}
@@ -37,7 +37,7 @@ class TaskGroupDAO extends DataAccess {
 class TaskDAO extends DataAccess {
 
 	public function find_all($gid) {
-		$sql = "SELECT task_id, group_id, name, dead, done, pid, psid, ctime, mtime, gcal_id
+		$sql = "SELECT task_id, group_id, name, dead, done, pid, sid, ctime, mtime, gcal_id
 				FROM t
 				WHERE dead IS NULL AND group_id = :group_id
 				ORDER BY task_id DESC";
@@ -60,7 +60,7 @@ class TaskDAO extends DataAccess {
 			"dead",
 			"done",
 			"pid",
-			"psid"
+			"sid"
 		);
 		$columns = array_map(create_function(
 				'$col',
