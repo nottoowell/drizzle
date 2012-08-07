@@ -85,11 +85,11 @@ if ($cmd == 'html') {
 			}
 			break;
 		case 'task.update':
-			debug($req_json);
+			#debug($req_json);
 			$data = json_decode($req_json);
 			$results = array();
 			foreach ($data as $datum) {
-				debug_foreach($datum);
+				#debug_foreach($datum);
 				$task = Task::with_obje($datum);
 				if ($task) {
 					$result = $task->save();

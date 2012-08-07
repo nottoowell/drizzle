@@ -12,12 +12,12 @@ class DataAccess {
 	public function __construct($dsn) {
 		$this->db = new SQLite3($dsn);
 	}
-
+	
 	protected function execute($sql, $params) {
 		#debug("DataAccess.execute()");
 		#debug($sql);
 		#debug_foreach($params);
-
+		
 		$stmt = $this->prepare_and_bind($sql, $params);
 		if ($stmt->execute()) {
 			if (strpos(strtolower($sql), "insert") !== FALSE) {
@@ -29,7 +29,7 @@ class DataAccess {
 		}
 		return -1;
 	}
-
+	
 	protected function query($sql, $params) {
 		$stmt = $this->prepare_and_bind($sql, $params);
 		$res = $stmt->execute();
@@ -41,7 +41,7 @@ class DataAccess {
 		}
 		return $rows;
 	}
-
+	
 	private function prepare_and_bind($sql, $params) {
 		$stmt = $this->db->prepare($sql);
 		if (strpos($sql, "?") != FALSE) {

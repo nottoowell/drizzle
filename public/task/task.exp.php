@@ -34,7 +34,6 @@ SELECT group_id, name, dead, psid, ctime, mtime FROM g
 SQL;
 query_export($sql);
 
-
 echo "<h2>t</h2>";
 
 $sql = <<<SQL

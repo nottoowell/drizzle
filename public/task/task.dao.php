@@ -4,7 +4,7 @@ require_once('core/dao.php');
 require_once('core/util.php');
 
 class TaskGroupDAO extends DataAccess {
-
+	
 	public function find_all() {
 		$sql = "SELECT group_id, name, dead, sid, ctime, mtime FROM g WHERE dead IS NULL";
 		
@@ -12,15 +12,15 @@ class TaskGroupDAO extends DataAccess {
 		
 		return $this->query($sql, $params);
 	}
-
+	
 	public function create($group) {
 		#debug("TaskGroupDAO.create()");
 		#debug_foreach($group);
-
+		
 		$sql = "INSERT INTO g (name) VALUES (:name)";
 		return $this->execute($sql, $group);
 	}
-
+	
 	public function update($group) {
 		#debug("TaskGroupDAO.update()");
 		#debug_foreach($group);
@@ -35,24 +35,24 @@ class TaskGroupDAO extends DataAccess {
 }
 
 class TaskDAO extends DataAccess {
-
+	
 	public function find_all($gid) {
 		$sql = "SELECT task_id, group_id, name, dead, done, pid, sid, ctime, mtime, gcal_id
 				FROM t
 				WHERE dead IS NULL AND group_id = :group_id
 				ORDER BY task_id DESC";
-
+		
 		$params = (object) array();
 		$params->group_id = $gid;
 		
 		return $this->query($sql, $params);
 	}
-
+	
 	public function create($group) {
 		$sql = "INSERT INTO t (group_id, name) VALUES (:group_id, :name)";
 		return $this->execute($sql, $group);
 	}
-
+	
 	public function update($group) {
 		$columns = array(
 			"group_id",
@@ -82,7 +82,7 @@ class TaskHasNoteDAO extends DataAccess {
 }
 
 class TaskNoteDAO extends DataAccess {
-
+	
 	function find($tid) {
 		$sql = "SELECT n.note_id AS note_id, n.note AS note
 				FROM thn, n
@@ -92,23 +92,23 @@ class TaskNoteDAO extends DataAccess {
 		#		WHERE thn.task_id = :task_id AND n.dead IS NULL";
 		#debug($sql);
 		#debug($tid);
-
+		
 		$params = (object) array();
 		$params->task_id = $tid;
 		
 		return $this->query($sql, $params);
 	}
-
+	
 	function create($note) {
 		$sql = "INSERT INTO n (note) VALUES (:note)";
 		return $this->execute($sql, $note);
 	}
-
+	
 	function update($note) {
 		$sql = "UPDATE n SET note = :note WHERE note_id = :note_id";
 		return $this->execute($sql, $note);
 	}
-
+	
 	function destroy($note) {
 		$sql = "UPDATE n SET dead = 'D' WHERE note_id = :note_id";
 		return $this->execute($sql, $note);
