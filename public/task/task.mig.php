@@ -8,31 +8,31 @@ function execute_migrate($sql) {
 	$db->exec($sql);
 }
 
-$migrate_version = 6;
+$migrate_version = 7;
 echo "<p>migrate to version {$migrate_version}</p>";
 
-/*
+//*
 $sql = <<<SQL
 DROP TABLE IF EXISTS thn
 SQL;
 execute_migrate($sql);
 //*/
 
-/*
+//*
 $sql = <<<SQL
 DROP TABLE IF EXISTS n
 SQL;
 execute_migrate($sql);
 //*/
 
-/*
+//*
 $sql = <<<SQL
 DROP TABLE IF EXISTS t
 SQL;
 execute_migrate($sql);
 //*/
 
-/*
+//*
 $sql = <<<SQL
 DROP TABLE IF EXISTS g
 SQL;
