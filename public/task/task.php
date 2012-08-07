@@ -3,16 +3,16 @@
 require_once('task.dao.php');
 
 class TaskGroup {
-
+	
 	private $data;
-
+	
 	static function all() {
 		global $dsn;
-
+		
 		$dao = new TaskGroupDAO($dsn);
 		return $dao->find_all();
 	}
-
+	
 	static function with_obje($obje) {
 		if (empty($obje)) {
 			return null;
@@ -24,14 +24,14 @@ class TaskGroup {
 		}
 		return $group;
 	}
-
+	
 	function save() {
 		global $dsn;
 		
 		#debug("TaskGroup.save()");
-
+		
 		$result = (object) array();
-
+		
 		$dao = new TaskGroupDAO($dsn);
 		if (isset($this->data->group_id)) {
 			#debug($this->data->group_id);
@@ -46,36 +46,38 @@ class TaskGroup {
 				$result->group_id = $retval;
 			}
 		}
-
+		
 		return $result;
 	}
 }
 
 class Task {
-
+	
 	private $data;
-
+	
 	static function all($gid) {
 		global $dsn;
-
+		
 		#debug("Task.all()");
 		#debug("gid=" . $gid);
 		
 		$dao = new TaskDAO($dsn);
 		$data = $dao->find_all($gid);
 		#debug_foreach($data);
-
+		
 		$results = array();
-		foreach ($data as $datum) {
-			#debug_foreach($datum);
-			$task = Task::with_obje($datum);
-			$note = $task->note()->read();
-			if ($note) $task->data->note = $note;
-			$results[] = $task->data;
+		if ($data) {
+			foreach ($data as $datum) {
+				#debug_foreach($datum);
+				$task = Task::with_obje($datum);
+				$note = $task->note()->read();
+				if ($note) $task->data->note = $note;
+				$results[] = $task->data;
+			}
 		}
 		return $results;
 	}
-
+	
 	static function with_obje($obje) {
 		if (empty($obje)) {
 			return null;
@@ -97,14 +99,14 @@ class Task {
 		}
 		return $task;
 	}
-
+	
 	function save() {
 		global $dsn;
-
+		
 		#debug("Task.save()");
 		
 		$result = (object) array();
-
+		
 		$dao = new TaskDAO($dsn);
 		if (isset($this->data->task_id)) {
 			#debug($this->data->task_id);
@@ -119,10 +121,10 @@ class Task {
 				$result->task_id = $retval;
 			}
 		}
-
+		
 		return $result;
 	}
-
+	
 	function note() {
 		debug("Task.note()");
 		if (isset($this->data->task_id)) {
@@ -145,20 +147,20 @@ class Task {
 }
 
 class TaskNote {
-
+	
 	private $note;
-
+	
 	public function __construct($task_id=NULL, $note=NULL) {
 		$this->note = (object) array();
 		$this->note->task_id = $task_id;
 		$this->note->note = $note;
 	}
-
+	
 	function read() {
 		global $dsn;
-
+		
 		#debug("TaskNote.read()");
-
+		
 		$note_dao = new TaskNoteDAO($dsn);
 		if (isset($this->note->task_id)) {
 			#debug("task_id=" . $this->note->task_id);
@@ -169,12 +171,12 @@ class TaskNote {
 			}
 		}
 	}
-
+	
 	function save() {
 		global $dsn;
-
+		
 		$result = (object) array();
-
+		
 		$note_dao = new TaskNoteDAO($dsn);
 		if (isset($this->note->task_id)) {
 			$note = $note_dao->find($this->note->task_id);
