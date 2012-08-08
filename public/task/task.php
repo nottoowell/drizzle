@@ -129,14 +129,14 @@ class Task {
 		debug("Task.note()");
 		if (isset($this->data->task_id)) {
 			#debug("task_id=" . $this->data->task_id);
-			if ($this->data->note) {
+			if (isset($this->data->note) && ! empty($this->data->note) {
 				#debug("note=" . $this->data->note);
 				return new TaskNote($this->data->task_id, $this->data->note);
 			} else {
 				return new TaskNote($this->data->task_id);
 			}
 		} else {
-			if ($this->data->note) {
+			if (isset($this->data->note) && ! empty($this->data->note) {
 				#debug("note=" . $this->data->note);
 				return new TaskNote(NULL, $this->data->note);
 			} else {
