@@ -168,20 +168,25 @@ h1 {
  */
 
 #content {
+	/*
 	overflow: hidden;
-
+	*/
+	
 	position: absolute;
 	left: 0;
 	right: 0;
 	top: 40px;
 	bottom: 0;
-
+	
 	width: 100%;
 	max-width: 480px;
-	height: 400px;
-
+	/*
+	height: 100%;
+	max-height: 400px;
+	*/
+	
 	padding: 0px 10px;
-
+	
 	/*
 	display: -webkit-box;
 	-webkit-box-orient: horizontal;
