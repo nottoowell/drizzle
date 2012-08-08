@@ -182,7 +182,7 @@ class TaskNote {
 		$note_dao = new TaskNoteDAO($dsn);
 		if (isset($this->note->task_id)) {
 			$note = $note_dao->find($this->note->task_id);
-			if ($note) {
+			if (! empty($note)) {
 				$this->note->note_id = $note->note_id;
 				if ($this->note->note) {
 					$retval = $note_dao->update($this->note);
