@@ -53,6 +53,7 @@ a {
 	float: left;
 }
 .right {
+	clear: right;
 	float: right;
 }
 
@@ -353,9 +354,11 @@ input[data-action="edit"].active {
  * div#content > div.main > div.tasks-view
  */
 
+/*
 .tasks-view div.add {
 	clear: left;
 }
+*/
 
 .tasks-view li {
 	vertical-align: middle;
@@ -2045,7 +2048,7 @@ _.includes(TasksEditor, {
 		this.hide_input();
 		
 		var $target = $(e.target);
-		var $label = $target.parent();
+		var $label = $target;
 		$label.addClass('inactive');
 		var $input = $label.siblings('input');
 		$input.val($target.html());
@@ -2063,7 +2066,7 @@ _.includes(TasksEditor, {
 	},
 	hide_input: function () {
 		var $pane = this.$pane;
-		$pane.find('label').removeClass('inactive');
+		$pane.find('a').removeClass('inactive');
 		$pane.find('input').removeClass('active');
 	},
 	show_menu: function (e) {
