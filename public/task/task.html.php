@@ -180,7 +180,7 @@ h1 {
 	max-width: 480px;
 	height: 400px;
 
-	margin: 0px 10px;
+	padding: 0px 10px;
 
 	/*
 	display: -webkit-box;
