@@ -136,7 +136,7 @@ class Task {
 				return new TaskNote($this->data->task_id);
 			}
 		} else {
-			if (isset($this->data->note) && ! empty($this->data->note) {
+			if (isset($this->data->note) && ! empty($this->data->note)) {
 				#debug("note=" . $this->data->note);
 				return new TaskNote(NULL, $this->data->note);
 			} else {
