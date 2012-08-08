@@ -260,6 +260,10 @@ div.toolbar {
 	padding-left: 10px;
 }
 
+div.toolbar a:first-child {
+	clear: left;
+}
+
 div.toolbar input {
 	display: none;
 
@@ -1632,7 +1636,7 @@ _.extends(TaskGroups, {});
 				<button type="button" class="right" data-action="edit">Edit</button>
 			</header>
 			<div class="toolbar">
-				<label><a href="javascript:" data-action="edit">+ New Task</a></label>
+				<a href="javascript:" data-action="edit">+ New Task</a>
 				<input type="text" data-action="edit-new">
 			</div>
 			<ul></ul>
