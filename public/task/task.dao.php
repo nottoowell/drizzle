@@ -48,12 +48,12 @@ class TaskDAO extends DataAccess {
 		return $this->query($sql, $params);
 	}
 	
-	public function create($group) {
-		$sql = "INSERT INTO t (group_id, name) VALUES (:group_id, :name)";
-		return $this->execute($sql, $group);
+	public function create($task) {
+		$sql = "INSERT INTO t (group_id, name, sid) VALUES (:group_id, :name, :sid)";
+		return $this->execute($sql, $task);
 	}
 	
-	public function update($group) {
+	public function update($task) {
 		$columns = array(
 			"group_id",
 			"name",
@@ -69,7 +69,7 @@ class TaskDAO extends DataAccess {
 		$columns = join(", ", $columns);
 		$sql = "UPDATE t SET {$columns} WHERE task_id = :task_id";
 		#debug($sql);
-		return $this->execute($sql, $group);
+		return $this->execute($sql, $task);
 	}
 }
 

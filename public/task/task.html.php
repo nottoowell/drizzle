@@ -44,6 +44,10 @@ a {
 	text-decoration: none;
 }
 
+.align-center {
+	text-align: center;
+}
+
 .left {
 	clear: left;
 	float: left;
@@ -53,20 +57,106 @@ a {
 }
 
 /*
- * header#title
+.align-center
+.align-right
+.left
+.right
+
+header.page-header
+	h1
+div.content
+	section.groups-view
+		header.sect-header
+			h2
+			button[data-action=edit]
+		div.toolbar
+			a[data-action=enter-edit-mode]
+			input[type=text data-action=edit-new]
+		ul
+			li
+				a
+	section.groups-edit
+		header.sect-header
+			h2
+			button[data-action=view]
+		ul
+			li
+				a[data-action=destroy]
+				a[data-action=enter-edit-mode]
+				input[type=text data-action=edit]
+	section.tasks-view
+		header.sect-header
+			button[data-action=groups]
+			h2
+			button[data-action=edit]
+		div.toolbar
+			a[data-action=enter-edit-mode]
+			input[type=text data-action=edit-new]
+		ul
+			li
+				input[type=checkbox]
+				a
+					label
+					p.note
+	section.tasks-edit
+		header.sect-header
+			h2
+			button[data-action=view]
+		div.toolbar
+			button[data-action=clear]
+		ul
+			li
+				a[data-action=destroy]
+				a[data-action=enter-edit-mode]
+				input[type=text data-action=edit]
+				button
+		div#task-arrange.menu
+			a[data-action=indent]
+			a[data-action=unindent]
+			a[data-action=move-up]
+			a[data-action=move-down]
+	section.task-edit
+		header.sect-header
+			h2
+			button[data-action=apply]
+		div.form
+			p
+				input[type=checkbox]
+				input[type=text]
+			p
+				textarea
+			p
+				label
+				input[type=hidden]
+				button[data-action=groups]
+		div#group-pick.menu
+			ul
+				li
+					a
+			footer
+				button[data-action=close]
+footer.page-footer
+
+*/
+
+/*
+ * header.page-header
  */
 
-#title {
-	/* overflow: hidden; */
+header.page-header {
+	text-align: right;
+
 	height: 40px;
 	line-height: 40px;
 
 	max-width: 480px;
-	
-	text-align: right;
 }
 
-#title h1 {
+/*
+ * header.page-header > h1
+ */
+
+h1 {
 	color: #ffffff;
 	text-shadow: 0 1px 1px #000000;
 	margin: 0 10px;
@@ -89,23 +179,28 @@ a {
 	max-width: 480px;
 	height: 400px;
 
+	margin: 0px 10px;
+
+	/*
 	display: -webkit-box;
 	-webkit-box-orient: horizontal;
-	/* -webkit-box-align: stretch; */
+	/= -webkit-box-align: stretch; =/
 	-webkit-box-pack: left;
 
 	display: -moz-box;
 	-moz-box-orient: horizontal;
-	/* -moz-box-align: stretch; */
+	/= -moz-box-align: stretch; =/
 	-moz-box-pack: left;
+	*/
 }
 
 /*
  * div#content > div.main
  */
 
+/*
 #content .main {
-	/* We want .main to expand as far as possible */
+	/= We want .main to expand as far as possible =/
 	-webkit-box-flex: 1;
 	-moz-box-flex: 1;
 	box-flex: 1;
@@ -119,39 +214,52 @@ a {
 .main > div.active {
 	display: block;
 	
+	/= expand as far as possible =/
+	-webkit-box-flex: 1;
+	-moz-box-flex: 1;
+	box-flex: 1;
+}
+*/
+
+section {
+	display: none;
+}
+section.active {
+	display: block;
+	
 	/* expand as far as possible */
 	-webkit-box-flex: 1;
 	-moz-box-flex: 1;
 	box-flex: 1;
 }
 
-.main header {
+header.sect-header {
+	text-align: center;
+
 	height: 30px;
 	line-height: 30px;
-
-	text-align: center;
 
 	border-top: 1px solid #808080;
 	border-bottom: 1px solid #808080;
 }
 
-div.add {
+div.toolbar {
 	/* height: 30px; */
 	line-height: 30px;
 
 	padding-left: 10px;
 }
 
-div.add input {
+div.toolbar input {
 	display: none;
 
 	/* width: 150px; */
 }
-div.add input.active {
+div.toolbar input.active {
 	display: inline;
 }
 
-.main ul {
+ul {
 	list-style-type: none;
 
 	-webkit-padding-start: 0px;
@@ -159,7 +267,7 @@ div.add input.active {
 	-webkit-margin-after: 0px;
 }
 
-.main li {
+li {
 	border-bottom: 1px dotted #404040;
 
 	height: 30px;
@@ -167,23 +275,32 @@ div.add input.active {
 
 	padding-left: 10px;
 }
-.main li:first-child {
+li:first-child {
 	border-top: 1px dotted #404040;
 }
 
 /*
- * div#content > div.main > div.taskgroups-show
+ * div#content > div.main > div.groups-view
  */
 
-#taskgroups-show-list li label {
+/*
+#groups-view-list li label {
 	cursor: pointer;
+}
+*/
+
+/*
+ * div#content > div.main > div.groups-edit
+ */
+
+a[data-action="destroy"] {
+	color: #cc0000;
+	font-size: 12pt;
+	margin-right: 5px;
 }
 
 /*
- * div#content > div.main > div.taskgroups-edit
- */
-
-#taskgroups-edit-list span {
+#groups-edit-list span {
 	cursor: pointer;
 
 	font-size: 12pt;
@@ -191,55 +308,74 @@ div.add input.active {
 	margin-right: 5px;
 }
 
-#taskgroups-edit-list span a {
+#groups-edit-list span a {
 	color: #cc0000;
 }
+*/
 
-#taskgroups-edit-list label {
+a[data-action="edit"] {
 	display: inline;
 }
-#taskgroups-edit-list label.inactive {
+a[data-action="edit"].inactive {
 	display: none;
 }
 
-#taskgroups-edit-list input {
+/*
+#groups-edit-list label {
+	display: inline;
+}
+#groups-edit-list label.inactive {
 	display: none;
 }
-#taskgroups-edit-list input.active {
+*/
+
+input[data-action="edit"] {
+	display: none;
+}
+input[data-action="edit"].active {
 	display: inline;
 }
 
 /*
- * div#content > div.main > div.tasks-show
+#groups-edit-list input {
+	display: inline;
+}
+#groups-edit-list input.active {
+	display: inline;
+}
+*/
+
+/*
+ * div#content > div.main > div.tasks-view
  */
 
-.tasks-show div.add {
+.tasks-view div.add {
 	clear: left;
 }
 
-#tasks-show-list li {
+.tasks-view li {
 	vertical-align: middle;
 }
 
-#tasks-show-list li input {
+.tasks-view li input[type="checkbox"] {
 	display: block;
 	height: 80%;
 	vertical-align: middle;
 	margin-right: 10px;
 }
 
-#tasks-show-list li a {
+.tasks-view li a {
 	display: block;
 }
 
-#tasks-show-list li label {
+.tasks-view li label {
 	cursor: pointer;
 }
-#tasks-show-list li label.done {
+.tasks-view li label.done {
 	text-decoration: line-through;
 }
 
-#tasks-show-list li .note {
+.tasks-view li .note {
 	color: #404040;
 	font-size: 10pt;
 	line-height: 20px;
@@ -249,11 +385,11 @@ div.add input.active {
 
 	text-overflow: ellipsis;
 }
-#tasks-show-list li .done {
+.tasks-view li .done {
 	text-decoration: line-through;
 }
 
-.main li.has-note {
+li.has-note {
 	height: 50px;
 }
 
@@ -261,13 +397,14 @@ div.add input.active {
  * div#content > div.main > div.tasks-edit
  */
 
+/*
 div.clear {
 	height: 30px;
 	line-height: 30px;
-
-	text-align: center;
 }
+*/
 
+/*
 #tasks-edit-list span {
 	cursor: pointer;
 
@@ -279,25 +416,32 @@ div.clear {
 #tasks-edit-list span a {
 	color: #cc0000;
 }
+*/
 
-#tasks-edit-list label {
-	display: inline;
-}
-#tasks-edit-list label.done {
+a[data-action="edit"].done {
 	text-decoration: line-through;
 }
-#tasks-edit-list label.inactive {
-	display: none;
-}
 
-#tasks-edit-list input {
-	display: none;
-}
-#tasks-edit-list input.active {
+/*
+.tasks-edit label {
 	display: inline;
 }
+.tasks-edit label.done {
+	text-decoration: line-through;
+}
+.tasks-edit label.inactive {
+	display: none;
+}
 
-div#menu {
+.tasks-edit input {
+	display: none;
+}
+.tasks-edit input.active {
+	display: inline;
+}
+*/
+
+div#task-arrange {
 	background: #000;
 	border: 1px solid #404040;
 	position: absolute;
@@ -306,13 +450,17 @@ div#menu {
 
 	display: none;
 }
-div#menu.active {
+div#task-arrange.active {
 	display: block;
 }
 
 /*
  * div#content > div.main > div.task-edit
  */
+
+.pane {
+
+}
 
 .task-edit textarea {
 	height: 80px;
@@ -559,7 +707,7 @@ var Collection = {
 (function (exports) {
 	var _src, _buf, _dst;
 	var _chg;
-
+	
 	function _reset() {
 		_chg = [];
 		_src = [];
@@ -581,46 +729,49 @@ var Collection = {
 				i++;
 			}
 		}
-		_sort_with_psid(ret);
+		_sort_with_sid(ret);
 		return ret;
 	};
-	function _sort_with_psid(arr) {
+	function _sort_with_sid(arr) {
 		arr.sort(function (x1, x2) {
-			if (x1.psid && x2.psid) {
-				if (x1.psid > x2.psid) return 1;
-				else if (x1.psid < x2.psid) return -1;
+			if (x1.sid && x2.sid) {
+				if (x1.sid > x2.sid) return -1;
+				else if (x1.sid < x2.sid) return 1;
 			} else {
-				if (x1.psid) return 1;
-				else if (x2.psid) return -1;
+				if (x1.sid) return -1;
+				else if (x2.sid) return 1;
 			}
+			if (x1.task_id > x2.task_id) return -1; // reverse order (latest first)
+			else if (x1.task_id < x2.task_id) return 1;
 			return 0;
 		});
 	};
 	function _insert(x) {
 		var dst = _dst;
-		if (x.psid) {
-			var prev_sib_pos = _index_by_id(x.psid);
-			if (prev_sib_pos >= 0) {
-				x.indent = dst[prev_sib_pos].indent;
-				dst.splice(prev_sib_pos + 1, 0, x);
+		var prev_sib_pos = _index_by_sid(x.task_id);
+		if (prev_sib_pos >= 0) {
+			x.depth(dst[prev_sib_pos].depth());
+			dst.splice(prev_sib_pos + 1, 0, x);
+			return;
+		}
+		if (x.sid) {
+			var next_sib_pos = _index_by_id(x.sid);
+			if (next_sib_pos >= 0) {
+				x.depth(dst[next_sib_pos].depth());
+				dst.splice(next_sib_pos, 0, x);
 				return;
 			}
-		} else if (x.pid) {
+		}
+		if (x.pid) {
 			var ppos = _index_by_id(x.pid);
 			if (ppos >= 0) {
-				x.indent = dst[ppos].indent + 1;
+				x.depth(dst[ppos].depth() + 1);
 				dst.splice(ppos + 1, 0, x);
 				return;
 			}
 		} else {
-			x.indent = 0;
-			dst.unshift(x);
-			return;
-		}
-		var next_sib_pos = _index_by_psid(x.task_id);
-		if (next_sib_pos >= 0) {
-			x.indent = dst[next_sib_pos].indent;
-			dst.splice(next_sib_pos, 0, x);
+			x.depth(0);
+			dst.push(x);
 			return;
 		}
 	};
@@ -633,10 +784,10 @@ var Collection = {
 		}
 		return -1;
 	};
-	function _index_by_psid(psid) {
+	function _index_by_sid(sid) {
 		var size = _dst.length;
 		for (var i = 0; i < size; i++) {
-			if (_dst[i].psid == psid) {
+			if (_dst[i].sid == sid) {
 				return i;
 			}
 		}
@@ -644,61 +795,75 @@ var Collection = {
 	};
 	function _move(x, ctx) {
 		if (ctx.from == ctx.to) {
-			_unlink_to_next_sib(x);
+			_unlink_to_prev_sib(x);
 			x.pid = ctx.pid;
-			x.psid = ctx.psid;
+			x.sid = ctx.sid;
 			_chg.push(x);
 			_buf = _subset(x);
-			var indent_delta = ctx.indent - x.indent;
-			_indent(_buf, indent_delta);
+			var depth_delta = ctx.depth - x.depth();
+			_depth(_buf, depth_delta);
+			_link_to_prev_sib(x, ctx.to);
 			return;
 		}
 		var dst = _dst;
 		if (ctx.from > ctx.to) {
 			_remove_at(x, ctx.from);
 			x.pid = ctx.pid;
-			x.psid = ctx.psid;
+			x.sid = ctx.sid;
 			_chg.push(x);
-			var indent_delta = ctx.indent - x.indent;
-			_indent(_buf, indent_delta);
+			var depth_delta = ctx.depth - x.depth();
+			_depth(_buf, depth_delta);
 			_insert_at(x, ctx.to);
 			return;
 		}
 		if (ctx.from < ctx.to) {
 			_remove_at(x, ctx.from);
 			x.pid = ctx.pid;
-			x.psid = ctx.psid;
+			x.sid = ctx.sid;
 			_chg.push(x);
-			var indent_delta = ctx.indent - x.indent;
-			_indent(_buf, indent_delta);
-			_insert_at(x, ctx.to - _buf.length);
+			var depth_delta = ctx.depth - x.depth();
+			_depth(_buf, depth_delta);
+			_insert_at(x, ctx.to - _buf.length + 1);
 			return;
 		}
 	};
-	function _unlink_to_next_sib(x) {
+	function _unlink_to_prev_sib(x) {
 		var prev_sib = _prev_sib(x);
-		var next_sib = _next_sib(x);
-		if (next_sib) {
-			if (prev_sib) {
-				next_sib.psid = prev_sib.task_id;
+		if (prev_sib) {
+			var next_sib = _next_sib(x);
+			if (next_sib) {
+				prev_sib.sid = next_sib.task_id;
 			} else {
-				next_sib.psid = null;
+				prev_sib.sid = null;
 			}
-			_chg.push(next_sib);
+			_chg.push(prev_sib);
+
 		}
 	};
 	function _remove_at(x, pos) {
-		_unlink_to_next_sib(x);
+		_unlink_to_prev_sib(x);
 		_buf = _subset(x);
 		_dst.splice(pos, _buf.length);
 	};
+	function _link_to_prev_sib(x, pos) {
+		while (pos > 0) {
+			pos--;
+			item = _dst[pos];
+			if (item.pid == x.pid) {
+				item.sid = x.task_id;
+				_chg.push(item);
+				break;
+			} else if (item.depth() < x.depth()) {
+				break;
+			}
+		}
+	};
 	function _insert_at(x, pos) {
 		var dst = _dst;
-		var next_sib = dst[pos];
-		if (next_sib && next_sib.pid == x.pid) {
-			next_sib.psid = x.task_id;
-			_chg.push(next_sib);
+		if (pos > dst.length) {
+			pos = dst.length;
 		}
+		_link_to_prev_sib(x, pos);
 		_dst = [].concat(dst.slice(0, pos)).concat(_buf).concat(dst.slice(pos));
 	};
 	function _subset(x) {
@@ -708,7 +873,7 @@ var Collection = {
 			var items = _dst;
 			for (var i = pos + 1; i < items.length; i++) {
 				var item = items[i];
-				if (item.psid == x.task_id || (x.pid && item.psid == x.pid) || item.indent < x.indent || item.pid == x.pid) {
+				if (x.sid == item.task_id || (x.pid && _parent(x).sid == item.task_id) || item.depth() < x.depth() || item.pid == x.pid) {
 					break;
 				}
 				ret.push(item);
@@ -716,9 +881,9 @@ var Collection = {
 		}
 		return ret;
 	};
-	function _indent(subset, delta) {
+	function _depth(subset, delta) {
 		for (var i = 0; i < subset.length; i++) {
-			subset[i].indent += delta;
+			subset[i].depth(subset[i].depth() + delta);
 		}
 	};
 	function _descendant_size(x) {
@@ -728,7 +893,7 @@ var Collection = {
 			var items = _dst;
 			for (var i = pos + 1; i < items.length; i++) {
 				var item = items[i];
-				if (item.psid == x.task_id || (x.pid && item.psid == x.pid) || item.indent < x.indent || item.pid == x.pid) {
+				if (x.sid == item.task_id || (x.pid && _parent(x).sid == item.task_id) || item.depth() < x.depth() || item.pid == x.pid) {
 					break;
 				}
 				cnt++;
@@ -745,36 +910,38 @@ var Collection = {
 		}
 	};
 	function _prev_sib(x) {
-		if (x.psid) {
-			var prev_sib_pos = _index_by_id(x.psid);
-			if (prev_sib_pos >= 0) {
-				return _dst[prev_sib_pos];
-			}
-		} else if (x.pid == null) {
-			var pos = _index_by_id(x.task_id);
-			while (pos > 0) {
-				pos--;
-				if (_dst[pos].pid == null) {
-					return _dst[pos]
-				}
-			}
+		var prev_sib_pos = _index_by_sid(x.task_id);
+		if (prev_sib_pos >= 0) {
+			return _dst[prev_sib_pos];
 		}
+		// else if (x.pid == null) {
+		// 	var pos = _index_by_id(x.task_id);
+		// 	while (pos > 0) {
+		// 		pos--;
+		// 		if (_dst[pos].pid == null) {
+		// 			return _dst[pos]
+		// 		}
+		// 	}
+		// }
 	};
 	function _next_sib(x) {
-		var next_sib_pos = _index_by_psid(x.task_id);
-		if (next_sib_pos >= 0) {
-			return _dst[next_sib_pos];
-		} else if (x.pid == null) {
-			var pos = _index_by_id(x.task_id) + _descendant_size(x);
-			while (pos < _dst.length) {
-				if (_dst[pos].pid == null) {
-					return _dst[pos]
-				}
-				pos++;
+		if (x.sid) {
+			var next_sib_pos = _index_by_id(x.sid);
+			if (next_sib_pos >= 0) {
+				return _dst[next_sib_pos];
 			}
 		}
+		// else if (x.pid == null) {
+		// 	var pos = _index_by_id(x.task_id) + _descendant_size(x) + 1;
+		// 	while (pos < _dst.length) {
+		// 		if (_dst[pos].pid == null) {
+		// 			return _dst[pos]
+		// 		}
+		// 		pos++;
+		// 	}
+		// }
 	};
-
+	
 	var TasksArranger = {
 		init: function (tasks) {
 			_reset();
@@ -803,73 +970,62 @@ var Collection = {
 			if (currpos < 0) return; // not found
 			var dst = _dst;
 			if (sid) {
-				var prev_sib_pos = _index_by_id(sid);
-				if (prev_sib_pos >= 0) {
-					var prev_sib = dst[prev_sib_pos];
-					var new_pos = _index_by_psid(prev_sib.task_id);
-					if (new_pos < 0) {
-						new_pos = prev_sib_pos + _descendant_size(prev_sib) + 1;
-					}
-					var ctx = {pid: pid, sid: sid, indent: prev_sib.indent, from: currpos, to: new_pos};
+				var next_sib_pos = _index_by_id(sid);
+				if (next_sib_pos >= 0) {
+					var next_sib = dst[next_sib_pos];
+					var ctx = {pid: pid, sid: sid, depth: next_sib.depth(), from: currpos, to: next_sib_pos};
 					_move(x, ctx);
 					return;
 				}
-			} else if (pid) {
+			}
+			if (pid) {
 				var ppos = _index_by_id(pid);
 				if (ppos >= 0) {
-					var ctx = {pid: pid, sid: sid, indent: dst[ppos].indent + 1, from: currpos, to: ppos + 1};
+					var p = dst[ppos];
+					var new_pos = ppos + _descendant_size(p) + 1;
+					var ctx = {pid: pid, sid: sid, depth: p.depth() + 1, from: currpos, to: new_pos};
 					_move(x, ctx);
 					return;
 				}
-			} else {
-				var ctx = {pid: pid, sid: sid, indent: 0, from: currpos, to: 0};
-				_move(x, ctx);
-				return;
 			}
-			// fail to move
+			var new_pos = currpos + _descendant_size(x) + 1;
+			var ctx = {pid: pid, sid: sid, depth: 0, from: currpos, to: new_pos};
+			_move(x, ctx);
 		},
 		move_up: function (x) {
 			var prev_sib = _prev_sib(x);
 			if (prev_sib) {
-				this.move(x, x.pid, prev_sib.psid);
+				this.move(x, x.pid, prev_sib.task_id);
 				return;
 			}
 			var pos = _index_by_id(x.task_id);
 			var prev = _dst[pos - 1];
 			if (prev) {
-				this.move(x, prev.pid, prev.psid);
+				this.move(x, prev.pid, prev.task_id);
 			}
 		},
 		move_down: function (x) {
 			var next_sib = _next_sib(x);
 			if (next_sib) {
-				this.move(x, x.pid, next_sib.task_id);
+				this.move(x, x.pid, next_sib.sid);
 				return;
 			}
 			var pos = _index_by_id(x.task_id) + _descendant_size(x) + 1;
 			var next = _dst[pos];
 			if (next) {
-				this.move(x, next.task_id, null);
+				this.move(x, next.task_id, next.sid);
 			}
 		},
 		indent: function (x) {
 			var prev_sib = _prev_sib(x);
 			if (prev_sib) {
-				var prev_sib_pos = _index_by_id(prev_sib.task_id);
-				var pos = _index_by_id(x.task_id) - 1;
-				while (pos > prev_sib_pos) {
-					if (_dst[pos].pid == prev_sib.task_id) {
-						var prev_sib$last_child = _dst[pos];
-						break;
-					}
-				}
-				this.move(x, prev_sib.task_id, prev_sib$last_child ? prev_sib$last_child.task_id : null);
+				this.move(x, prev_sib.task_id, null);
 			}
 		},
 		unindent: function (x) {
 			var p = _parent(x);
 			if (p) {
-				this.move(x, p.pid, p.task_id);
+				this.move(x, p.pid, p.sid);
 			}
 		},
 		changed: function () {
@@ -877,6 +1033,10 @@ var Collection = {
 		},
 		subset: function (x) {
 			return _subset(x);
+		},
+		unlink_with_prev_sib: function (x) {
+			_chg = [];
+			_unlink_to_prev_sib(x);
 		},
 		ancestors: function (x) {
 			var results = [];
@@ -888,7 +1048,7 @@ var Collection = {
 			return results;
 		}
 	};
-
+	
 	exports.TasksArranger = TasksArranger;
 })(window);
 
@@ -910,8 +1070,15 @@ _.includes(Task, {
 			'group_id': this.group_id,
 			'name': this.name,
 			'pid': this.pid,
-			'psid': this.psid
+			'sid': this.sid
 		};
+	},
+	depth: function () {
+		if (arguments.length > 0) {
+				this.indent = arguments[0];
+			} else {
+				return this.indent || 0;
+			}
 	},
 	update: function (json, callback) {
 		var self = this;
@@ -1030,13 +1197,16 @@ _.includes(Tasks, {
 	create: function (json) {
 		var self = this;
 		var param = json;
+		if (this.length() > 0) {
+			_.extends(param, {'sid':this.get_at(0).task_id});
+		}
 		Storage.update('task-create', param, function (json) {
 			_.extends(param, json);
 			self.created(param);
 		})
 	},
 	created: function (json) {
-		this.prepend(new this.T().from_json(json));
+		this.prepend(new this.T(this).from_json(json));
 		if (this.events['created']) {
 			this.events['created']();
 		}
@@ -1063,7 +1233,7 @@ _.includes(Tasks, {
 	toggle_done: function (task_id) {
 		//var task = this.get(task_id);
 		//if (task) task.toggle_done();
-
+		
 		var self = this;
 		var params = [];
 		TasksArranger.data(this.models);
@@ -1092,7 +1262,7 @@ _.includes(Tasks, {
 		//if (this.events['changed']) {
 		//	this.events['changed']();
 		//}
-
+		
 		for (var i = 0; i < json.length; i++) {
 			var model = this.get(json[i].task_id);
 			if (model) {
@@ -1139,20 +1309,27 @@ _.includes(Tasks, {
 		var self = this;
 		var params = [];
 		var task = this.get(json.task_id);
+		var done = json.done;
 		var group_id = json.group_id;
 		if (task.group_id != group_id) {
 			json.pid = null;
-			json.psid = null;
+			json.sid = null;
 		}
 		var param = task.to_json();
 		_.extends(param, json);
 		params.push(param);
-		if (task.group_id != group_id) {
+		if (task.group_id != group_id || task.done != done) {
 			var subset = TasksArranger.subset(task);
 			for (var i = 1; i < subset.length; i++) {
 				var model = subset[i];
 				var param = model.to_json();
-				_.extends(param, {'group_id': group_id});
+				_.extends(param, {'group_id': group_id, 'done': done});
+				params.push(param);
+			}
+			TasksArranger.unlink_with_prev_sib(task);
+			var unlinked_prev = TasksArranger.changed();
+			if (unlinked_prev.length > 0) {
+				var param = unlinked_prev[0].to_json();
 				params.push(param);
 			}
 		}
@@ -1217,7 +1394,7 @@ _.includes(Tasks, {
 			TasksArranger[action].call(TasksArranger, task);
 			this.models = TasksArranger.data();
 			var changed_tasks = TasksArranger.changed();
-
+			
 			var self = this;
 			var params = [];
 			for (var i = 0; i < changed_tasks.length; i++) {
@@ -1360,7 +1537,7 @@ _.includes(TaskGroups, {
 		})
 	},
 	created: function (json) {
-		this.append(new this.T().from_json(json));
+		this.append(new this.T(this).from_json(json));
 		if (this.events['created']) {
 			this.events['created']();
 		}
@@ -1413,88 +1590,88 @@ _.extends(TaskGroups, {});
 </script>
 </head>
 <body>
-<header id="title">
+<header id="title" class="page-header">
 	<h1>Task</h1>
 </header>
 <div id="content">
-	<div class="main">
-		<div class="taskgroups-show">
-			<header>
+	<!--<div class="main">-->
+		<section class="groups-view">
+			<header class="sect-header">
 				<h2>All Groups</h2>
 				<button type="button" class="right" data-action="edit">Edit</button>
 			</header>
-			<div class="add">
-				<label><a href="javascript:">+ New Group</a></label>
-				<input type="text" data-action="add-new">
+			<div class="toolbar">
+				<a href="javascript:" data-action="edit">+ New Group</a>
+				<input type="text" data-action="edit-new">
 			</div>
-			<ul id="taskgroups-show-list"></ul>
-		</div>
-		<div class="taskgroups-edit">
-			<header>
+			<ul></ul>
+		</section>
+		<section class="groups-edit">
+			<header class="sect-header">
 				<h2>All Groups</h2>
-				<button type="button" class="right" data-action="done">Done</button>
+				<button type="button" class="right" data-action="view">Done</button>
 			</header>
-			<ul id="taskgroups-edit-list"></ul>
-		</div>
-		<div class="tasks-show">
-			<header>
+			<ul></ul>
+		</section>
+		<section class="tasks-view">
+			<header class="sect-header">
 				<button type="button" class="left" data-action="groups">All Groups</button>
 				<h2></h2>
 				<button type="button" class="right" data-action="edit">Edit</button>
 			</header>
-			<div class="add">
-				<label><a href="javascript:">+ New Task</a></label>
-				<input type="text" data-action="add-new">
+			<div class="toolbar">
+				<label><a href="javascript:" data-action="edit">+ New Task</a></label>
+				<input type="text" data-action="edit-new">
 			</div>
-			<ul id="tasks-show-list"></ul>
-		</div>
-		<div class="tasks-edit">
-			<header>
+			<ul></ul>
+		</section>
+		<section class="tasks-edit">
+			<header class="sect-header">
 				<button type="button" class="left" data-action="groups">All Groups</button>
 				<h2></h2>
-				<button type="button" class="right" data-action="done">Done</button>
+				<button type="button" class="right" data-action="view">Done</button>
 			</header>
-			<div class="clear">
+			<div class="toolbar align-center">
 				<button type="button" data-action="clear">Clear completed tasks</button>
 			</div>
-			<ul id="tasks-edit-list"></ul>
-			<div id="menu">
-				<label><a href="javascript:" data-action="indent">indent</a></label>
-				<label><a href="javascript:" data-action="unindent">unindent</a></label>
-				<label><a href="javascript:" data-action="move_up">up</a></label>
-				<label><a href="javascript:" data-action="move_down">down</a></label>
+			<ul></ul>
+			<div id="task-arrange">
+				<a href="javascript:" data-action="indent">indent</a>
+				<a href="javascript:" data-action="unindent">unindent</a>
+				<a href="javascript:" data-action="move-up">up</a>
+				<a href="javascript:" data-action="move-down">down</a>
 			</div>
-		</div>
-		<div class="task-edit">
-			<header>
+		</section>
+		<section class="task-edit">
+			<header class="sect-header">
 				<h2></h2>
 				<button type="button" class="right" data-action="done">Done</button>
 			</header>
-			<section></section>
+			<div class="pane"></div>
 			<div id="group-pick">
 				<ul id="group-pick-list"></ul>
 				<footer>
 					<button type="button" class="right" data-action="close">Close</button>
 				</footer>
 			</div>
-		</div>
-	</div>
+		</section>
+	<!--</div>-->
 </div><!-- &Xi; &equiv; -->
-<script type="text/x-jquery-tmpl" id="x-template-taskgroups-show-item"><li group_id="${group_id}"><label><a href="javascript:">${name}</a></label></li></script>
-<script type="text/x-jquery-tmpl" id="x-template-taskgroups-edit-item"><li group_id="${group_id}"><span><a href="javascript:">&#10006;</a></span> <label><a href="javascript:">${name}</a></label><input type="text" data-action="edit"></li></script>
+<script type="text/x-jquery-tmpl" id="x-template-groups-view-item"><li group_id="${group_id}"><a href="javascript:" data-action="pick">${name}</a></li></script>
+<script type="text/x-jquery-tmpl" id="x-template-groups-edit-item"><li group_id="${group_id}"><a href="javascript:" data-action="destroy">&#10006;</a> <label><a href="javascript:" data-action="edit">${name}</a></label><input type="text" data-action="edit"></li></script>
 <!--
-<script type="text/x-jquery-tmpl" id="x-template-tasks-show-item"><li task_id="${task_id}" {{if note}}class="has-note"{{/if}}><input type="checkbox" {{if done}}checked{{/if}}> <label {{if done}}class="done"{{/if}}><a href="javascript:">${name}</a>{{if note}}<p class="note"><a href="javascript:">${note}</a></p>{{/if}}</label></li></script>
+<script type="text/x-jquery-tmpl" id="x-template-tasks-view-item"><li task_id="${task_id}" {{if note}}class="has-note"{{/if}}><input type="checkbox" {{if done}}checked{{/if}}> <label {{if done}}class="done"{{/if}}><a href="javascript:">${name}</a>{{if note}}<p class="note"><a href="javascript:">${note}</a></p>{{/if}}</label></li></script>
 -->
-<script type="text/x-jquery-tmpl" id="x-template-tasks-show-item">
+<script type="text/x-jquery-tmpl" id="x-template-tasks-view-item">
 <li task_id="${task_id}" {{if note}}class="has-note"{{/if}}>
 	<input type="checkbox" class="left" {{if done}}checked{{/if}}>
-	<a href="javascript:">
+	<a href="javascript:" data-action="pick">
 		<label {{if done}}class="done"{{/if}}>${name}</label>
 		{{if note}}<p class="note {{if done}}done{{/if}}">${note}</p>{{/if}}
 	</a>
 </li>
 </script>
-<script type="text/x-jquery-tmpl" id="x-template-tasks-edit-item"><li task_id="${task_id}"><span><a href="javascript:">&#10006;</a></span> <label {{if done}}class="done"{{/if}}><a href="javascript:">${name}</a></label><input type="text" data-action="edit"><button class="right">M</button></li></script>
+<script type="text/x-jquery-tmpl" id="x-template-tasks-edit-item"><li task_id="${task_id}"><a href="javascript:" data-action="destroy">&#10006;</a> <a href="javascript:" data-action="edit">${name}</a><input type="text" {{if done}}class="done"{{/if}} data-action="edit"><button class="right" data-action="task-arrange">M</button></li></script>
 <script type="text/x-jquery-tmpl" id="x-template-task-edit">
 <p>
 	<input type="checkbox" {{if done}}checked{{/if}}>
@@ -1519,13 +1696,13 @@ _.includes(GroupsViewer, {
 	},
 	init: function (groups) {
 		if (groups) this.attach_model(groups);
-
-		this.$pane = $('div.taskgroups-show');
-		this.$input = this.$pane.find('div.add input');
+		
+		this.$pane = $('section.groups-view');
+		this.$input = this.$pane.find('div.toolbar input');
 		this.bind();
-
-		$.template('template_taskgroups_show_item', $('#x-template-taskgroups-show-item').html());
-
+		
+		$.template('template_groups_view_item', $('#x-template-groups-view-item').html());
+		
 		return this;
 	},
 	$pane: undefined,
@@ -1533,11 +1710,11 @@ _.includes(GroupsViewer, {
 	bind: function () {
 		var $pane = this.$pane;
 		var bindings = [
-			['click', 'button', 'open_editor'],
-			['click', 'div.add label', 'edit_new'],
-			['keypress', 'div.add input', 'create_on_enter'],
-			['blur', 'div.add input', 'hide_input'],
-			['click', 'ul#taskgroups-show-list label', 'picked']
+			['click', 'button[data-action="edit"]', 'open_editor'],
+			['click', 'a[data-action="edit"]', 'edit_new'],
+			['keypress', 'input[data-action="edit-new"]', 'create_on_enter'],
+			['blur', 'input[data-action="edit-new"]', 'hide_input'],
+			['click', 'a[data-action="pick"]', 'picked']
 		];
 		var self = this;
 		for (var i = 0; i < bindings.length; i++) {
@@ -1551,13 +1728,13 @@ _.includes(GroupsViewer, {
 	show: function () {
 		var $pane = this.$pane;
 		
-		var $ul = $pane.find('ul#taskgroups-show-list').html('');
+		var $ul = $pane.find('ul').html('');
 		for (var i = 0; i < this.groups.length(); i++) {
 			var group = this.groups.get_at(i);
-
-			$.tmpl('template_taskgroups_show_item', group).appendTo($ul);
+			
+			$.tmpl('template_groups_view_item', group).appendTo($ul);
 		}
-
+		
 		$pane.siblings().removeClass('active');
 		$pane.addClass('active');
 	},
@@ -1574,7 +1751,7 @@ _.includes(GroupsViewer, {
 	create_on_enter: function (e) {
 		if (e.keyCode != 13) return;
 		if (! this.$input.val()) return;
-
+		
 		this.groups.create({'name': this.$input.val()});
 		this.$input.val('');
 	},
@@ -1603,12 +1780,12 @@ _.includes(GroupsEditor, {
 	},
 	init: function (groups) {
 		if (groups) this.attach_model(groups);
-
-		this.$pane = $('div.taskgroups-edit');
+		
+		this.$pane = $('section.groups-edit');
 		this.bind();
-
-		$.template('template_taskgroups_edit_item', $('#x-template-taskgroups-edit-item').html());
-
+		
+		$.template('template_groups_edit_item', $('#x-template-groups-edit-item').html());
+		
 		return this;
 	},
 	$pane: undefined,
@@ -1616,11 +1793,11 @@ _.includes(GroupsEditor, {
 	bind: function () {
 		var $pane = this.$pane;
 		var bindings = [
-			['click', 'button', 'open_viewer'],
-			['click', 'ul#taskgroups-edit-list span', 'destroy'],
-			['click', 'ul#taskgroups-edit-list label', 'edit'],
-			['keypress', 'ul#taskgroups-edit-list input', 'update_on_enter'],
-			['blur', 'ul#taskgroups-edit-list input', 'hide_input']
+			['click', 'button[data-action="view"]', 'open_viewer'],
+			['click', 'a[data-action="destroy"]', 'destroy'],
+			['click', 'a[data-action="edit"]', 'edit'],
+			['keypress', 'input[data-action="edit"]', 'update_on_enter'],
+			['blur', 'input[data-action="edit"]', 'hide_input']
 		];
 		var self = this;
 		for (var i = 0; i < bindings.length; i++) {
@@ -1634,13 +1811,13 @@ _.includes(GroupsEditor, {
 	show: function () {
 		var $pane = this.$pane;
 		
-		var $ul = $pane.find('ul#taskgroups-edit-list').html('');
+		var $ul = $pane.find('ul').html('');
 		for (var i = 0; i < this.groups.length(); i++) {
 			var group = this.groups.get_at(i);
-
-			$.tmpl('template_taskgroups_edit_item', group).appendTo($ul);
+			
+			$.tmpl('template_groups_edit_item', group).appendTo($ul);
 		}
-
+		
 		$pane.siblings().removeClass('active');
 		$pane.addClass('active');
 	},
@@ -1652,11 +1829,11 @@ _.includes(GroupsEditor, {
 		this.groups.destroy($(e.target).parents('li').attr('group_id'));
 	},
 	destroyed: function (group_id) {
-		this.$pane.find('ul#taskgroups-edit-list li[group_id="'+group_id+'"]').remove();
+		this.$pane.find('li[group_id="'+group_id+'"]').remove();
 	},
 	edit: function (e) {
 		this.hide_input();
-
+		
 		var $target = $(e.target);
 		var $label = $target.parent();
 		$label.addClass('inactive');
@@ -1669,7 +1846,7 @@ _.includes(GroupsEditor, {
 		if (e.keyCode != 13) return;
 		$input = $(e.target);
 		if (! $input.val()) return;
-
+		
 		this.groups.update({'group_id': $input.parent().attr('group_id'), 'name': $input.val()});
 		$input.val('');
 		this.hide_input();
@@ -1695,14 +1872,14 @@ _.includes(TasksViewer, {
 	},
 	init: function (tasks) {
 		if (tasks) this.attach_model(tasks);
-
-		this.$pane = $('div.tasks-show');
-		this.$input = this.$pane.find('div.add input');
+		
+		this.$pane = $('section.tasks-view');
+		this.$input = this.$pane.find('div.toolbar input');
 		this.$h2 = this.$pane.find('h2');
 		this.bind();
-
-		$.template('template_tasks_show_item', $('#x-template-tasks-show-item').html());
-
+		
+		$.template('template_tasks_view_item', $('#x-template-tasks-view-item').html());
+		
 		return this;
 	},
 	$pane: undefined,
@@ -1713,12 +1890,11 @@ _.includes(TasksViewer, {
 		var bindings = [
 			['click', 'button[data-action="groups"]', 'open_group_viewer'],
 			['click', 'button[data-action="edit"]', 'open_editor'],
-			['click', 'div.add label', 'edit_new'],
-			['keypress', 'div.add input', 'create_on_enter'],
-			['blur', 'div.add input', 'hide_input'],
-			['click', 'ul#tasks-show-list input', 'toggle_done'],
-			//['click', 'ul#tasks-show-list label', 'picked']
-			['click', 'ul#tasks-show-list a', 'picked']
+			['click', 'a[data-action="edit"]', 'edit_new'],
+			['keypress', 'input[data-action="edit-new"]', 'create_on_enter'],
+			['blur', 'input[data-action="edit-new"]', 'hide_input'],
+			['click', 'input[type="checkbox"]', 'toggle_done'],
+			['click', 'a[data-action="pick"]', 'picked']
 		];
 		var self = this;
 		for (var i = 0; i < bindings.length; i++) {
@@ -1732,17 +1908,17 @@ _.includes(TasksViewer, {
 	},
 	show: function () {
 		var $pane = this.$pane;
-
+		
 		this.$h2.html(this.tasks.group.name);
 		
-		var $ul = $pane.find('ul#tasks-show-list').html('');
+		var $ul = $pane.find('ul').html('');
 		for (var i = 0; i < this.tasks.length(); i++) {
 			var task = this.tasks.get_at(i);
-
-			var indent = 10 + 20 * (task.indent || 0);
-			$.tmpl('template_tasks_show_item', task).css('padding-left', indent + 'px').appendTo($ul);
+			
+			var indent = 10 + 20 * task.depth();
+			$.tmpl('template_tasks_view_item', task).css('padding-left', indent + 'px').appendTo($ul);
 		}
-
+		
 		$pane.siblings().removeClass('active');
 		$pane.addClass('active');
 	},
@@ -1762,7 +1938,7 @@ _.includes(TasksViewer, {
 	create_on_enter: function (e) {
 		if (e.keyCode != 13) return;
 		if (! this.$input.val()) return;
-
+		
 		this.tasks.create({'group_id':this.tasks.group.group_id, 'name': this.$input.val()});
 		this.$input.val('');
 	},
@@ -1794,13 +1970,13 @@ _.includes(TasksEditor, {
 	},
 	init: function (tasks) {
 		if (tasks) this.attach_model(tasks);
-
-		this.$pane = $('div.tasks-edit');
+		
+		this.$pane = $('section.tasks-edit');
 		this.$h2 = this.$pane.find('h2');
 		this.bind();
-
+		
 		$.template('template_tasks_edit_item', $('#x-template-tasks-edit-item').html());
-
+		
 		return this;
 	},
 	$pane: undefined,
@@ -1810,14 +1986,14 @@ _.includes(TasksEditor, {
 		var $pane = this.$pane;
 		var bindings = [
 			['click', 'button[data-action="groups"]', 'open_group_viewer'],
-			['click', 'button[data-action="done"]', 'open_viewer'],
+			['click', 'button[data-action="view"]', 'open_viewer'],
 			['click', 'button[data-action="clear"]', 'clear'],
-			['click', 'ul#tasks-edit-list span', 'destroy'],
-			['click', 'ul#tasks-edit-list label', 'edit'],
-			['keypress', 'ul#tasks-edit-list input', 'update_on_enter'],
-			['blur', 'ul#tasks-edit-list input', 'hide_input'],
-			['click', 'ul#tasks-edit-list button', 'show_menu'],
-			['click', '#menu a', 'menuitem']
+			['click', 'a[data-action="destroy"]', 'destroy'],
+			['click', 'a[data-action="edit"]', 'edit'],
+			['keypress', 'input[data-action="edit"]', 'update_on_enter'],
+			['blur', 'input[data-action="edit"]', 'hide_input'],
+			['click', 'button[data-action="task-arrange"]', 'show_menu'],
+			['click', '#task-arrange a', 'menuitem']
 		];
 		var self = this;
 		for (var i = 0; i < bindings.length; i++) {
@@ -1831,17 +2007,17 @@ _.includes(TasksEditor, {
 	},
 	show: function () {
 		var $pane = this.$pane;
-
+		
 		this.$h2.html(this.tasks.group.name);
 		
-		var $ul = $pane.find('ul#tasks-edit-list').html('');
+		var $ul = $pane.find('ul').html('');
 		for (var i = 0; i < this.tasks.length(); i++) {
 			var task = this.tasks.get_at(i);
-
-			var indent = 10 + 20 * (task.indent || 0);
+			
+			var indent = 10 + 20 * task.depth();
 			$.tmpl('template_tasks_edit_item', task).css('padding-left', indent + 'px').appendTo($ul);
 		}
-
+		
 		$pane.siblings().removeClass('active');
 		$pane.addClass('active');
 	},
@@ -1859,11 +2035,11 @@ _.includes(TasksEditor, {
 		this.tasks.destroy($(e.target).parents('li').attr('task_id'));
 	},
 	destroyed: function (task_id) {
-		this.$pane.find('ul#tasks-edit-list li[task_id="'+task_id+'"]').remove();
+		this.$pane.find('li[task_id="'+task_id+'"]').remove();
 	},
 	edit: function (e) {
 		this.hide_input();
-
+		
 		var $target = $(e.target);
 		var $label = $target.parent();
 		$label.addClass('inactive');
@@ -1876,7 +2052,7 @@ _.includes(TasksEditor, {
 		if (e.keyCode != 13) return;
 		var $input = $(e.target);
 		if (! $input.val()) return;
-
+		
 		this.tasks.update({'task_id': $input.parent().attr('task_id'), 'name': $input.val()});
 		$input.val('');
 		this.hide_input();
@@ -1887,19 +2063,19 @@ _.includes(TasksEditor, {
 		$pane.find('input').removeClass('active');
 	},
 	show_menu: function (e) {
-		$menu = $('#menu');
+		$menu = $('#task-arrange');
 		$menu.attr('task_id',  $(e.target).parent().attr('task_id'));
 		$menu.css('left', $(e.target).position().left - 130);
 		$menu.css('top', $(e.target).position().top + 10);
 		$menu.addClass('active');
 	},
 	hide_menu: function () {
-		$menu = $('#menu');
+		$menu = $('#task-arrange');
 		$menu.removeClass('active');
 	},
 	menuitem: function (e) {
-		var action = $(e.target).attr('data-action');
-		var task_id = $('#menu').attr('task_id');
+		var action = $(e.target).attr('data-action').replace('-', '_');
+		var task_id = $('#task-arrange').attr('task_id');
 		this.tasks.rearrange(action, task_id);
 		this.hide_menu();
 	}
@@ -1918,13 +2094,13 @@ _.includes(TaskEditor, {
 	},
 	init: function (task) {
 		if (task) this.attach_model(task);
-
-		this.$pane = $('div.task-edit');
+		
+		this.$pane = $('section.task-edit');
 		this.$h2 = this.$pane.find('h2');
 		this.bind();
-
+		
 		$.template('template_task_edit', $('#x-template-task-edit').html());
-
+		
 		return this;
 	},
 	$pane: undefined,
@@ -1934,7 +2110,7 @@ _.includes(TaskEditor, {
 		var bindings = [
 			['click', 'button[data-action="done"]', 'open_viewer'],
 			['click', 'button[data-action="groups"]', 'show_group_picker'],
-			['click', 'ul#group-pick-list a', 'picked'],
+			['click', 'a[data-action="pick"]', 'picked'],
 			['click', 'button[data-action="close"]', 'hide_group_picker'],
 		];
 		var self = this;
@@ -1949,13 +2125,13 @@ _.includes(TaskEditor, {
 	},
 	show: function () {
 		var $pane = this.$pane;
-		var $section = $pane.find('section').html('');
-
+		var $area = $pane.find('.pane').html('');
+		
 		this.$h2.html(this.task.name);
-
+		
 		this.task.group_name = this.task.collection.group.name;
-		$.tmpl('template_task_edit', this.task).appendTo($section);
-
+		$.tmpl('template_task_edit', this.task).appendTo($area);
+		
 		$pane.siblings().removeClass('active');
 		$pane.addClass('active');
 	},
@@ -1967,7 +2143,7 @@ _.includes(TaskEditor, {
 		task.name = $pane.find('input[type=text]').val();
 		task.note = _.trim($pane.find('textarea').val()) || null;
 		task.group_id = $pane.find('input[type=hidden]').val();
-
+		
 		this.task.collection.whole_update(task);
 	},
 	show_group_picker: function () {
@@ -1976,10 +2152,10 @@ _.includes(TaskEditor, {
 		var $ul = $pane.find('ul#group-pick-list').html('');
 		for (var i = 0; i < groups_viewer.groups.length(); i++) {
 			var group = groups_viewer.groups.get_at(i);
-
-			$.tmpl('template_taskgroups_show_item', group).appendTo($ul);
+			
+			$.tmpl('template_groups_view_item', group).appendTo($ul);
 		}
-
+		
 		$pane.addClass('active');
 	},
 	picked: function (e) {
@@ -1987,7 +2163,7 @@ _.includes(TaskEditor, {
 		var group_name = groups_viewer.groups.get(group_id).name;
 		this.$pane.find('input[type=hidden]').val(group_id);
 		this.$pane.find('label').html(group_name);
-
+		
 		this.hide_group_picker();
 	},
 	hide_group_picker: function () {
