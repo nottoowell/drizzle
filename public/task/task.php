@@ -165,9 +165,11 @@ class TaskNote {
 		if (isset($this->note->task_id)) {
 			#debug("task_id=" . $this->note->task_id);
 			$notes = $note_dao->find($this->note->task_id);
-			if ($notes[0]) $note = (object) $notes[0];
-			if ($note && $note->note) {
-				return $note->note;
+			if ($notes[0]) {
+				$note = (object) $notes[0];
+				if ($note && $note->note) {
+					return $note->note;
+				}
 			}
 		}
 	}
