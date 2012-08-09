@@ -1674,7 +1674,7 @@ _.extends(TaskGroups, {});
 	<!--</div>-->
 </div><!-- &Xi; &equiv; -->
 <script type="text/x-jquery-tmpl" id="x-template-groups-view-item"><li group_id="${group_id}"><a href="javascript:" data-action="pick">${name}</a></li></script>
-<script type="text/x-jquery-tmpl" id="x-template-groups-edit-item"><li group_id="${group_id}"><a href="javascript:" data-action="destroy">&#10006;</a> <label><a href="javascript:" data-action="edit">${name}</a></label><input type="text" data-action="edit"></li></script>
+<script type="text/x-jquery-tmpl" id="x-template-groups-edit-item"><li group_id="${group_id}"><a href="javascript:" data-action="destroy">&#10006;</a> <a href="javascript:" data-action="edit">${name}</a><input type="text" data-action="edit"></li></script>
 <!--
 <script type="text/x-jquery-tmpl" id="x-template-tasks-view-item"><li task_id="${task_id}" {{if note}}class="has-note"{{/if}}><input type="checkbox" {{if done}}checked{{/if}}> <label {{if done}}class="done"{{/if}}><a href="javascript:">${name}</a>{{if note}}<p class="note"><a href="javascript:">${note}</a></p>{{/if}}</label></li></script>
 -->
@@ -1851,7 +1851,7 @@ _.includes(GroupsEditor, {
 		this.hide_input();
 		
 		var $target = $(e.target);
-		var $label = $target.parent();
+		var $label = $target;
 		$label.addClass('inactive');
 		var $input = $label.siblings('input');
 		$input.val($target.html());
